@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { images } from '../constants'
 
-const transition = { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }
+const transition = { /*duration: 0.5,*/ ease: [0.43, 0.13, 0.23, 0.96] }
 
 const thumbnailVariants = {
   initial: { scale: 0.9, opacity: 0 },
@@ -24,19 +24,19 @@ const imageVariants = {
   hover: { scale: 1.1 },
 }
 
-const Thumbnail = ({ id, i }) => (
+const Thumbnail = (data: { id: string; i: number }) => (
   <>
-    <motion.div className="thumbnail" variants={thumbnailVariants}>
+    <motion.div className='thumbnail' variants={thumbnailVariants}>
       <motion.div
-        className="frame"
-        whileHover="hover"
+        className='frame'
+        whileHover='hover'
         variants={frameVariants}
         transition={transition}
       >
-        <Link href="/image/[index]" as={`/image/${i}`} scroll={false}>
+        <Link href='/image/[index]' as={`/image/${data.i}`} scroll={false}>
           <motion.img
-            src={`https://images.unsplash.com/${id}?auto=format&fit=crop&w=1500`}
-            alt="The Barbican"
+            src={`https://images.unsplash.com/${data.id}?auto=format&fit=crop&w=1500`}
+            alt='The Barbican'
             variants={imageVariants}
             transition={transition}
           />
@@ -70,12 +70,12 @@ const Thumbnail = ({ id, i }) => (
 const Gallery = () => (
   <>
     <h1>Motion</h1>
-    <div className="gallery">
+    <div className='gallery'>
       <motion.div
-        className="thumbnails"
-        initial="initial"
-        animate="enter"
-        exit="exit"
+        className='thumbnails'
+        initial='initial'
+        animate='enter'
+        exit='exit'
         variants={{ exit: { transition: { staggerChildren: 0.1 } } }}
       >
         {images.map((id, i) => (
