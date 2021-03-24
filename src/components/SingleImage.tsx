@@ -23,16 +23,18 @@ const backVariants = {
   enter: { x: 0, opacity: 1, transition: { delay: 1, ...transition } },
 }
 
-const SingleImage = ({ index }) => (
+const SingleImage = (props: { index: number }) => (
   <>
-    <motion.div className="single" initial="exit" animate="enter" exit="exit">
+    <motion.div className='single' initial='exit' animate='enter' exit='exit'>
       <motion.img
         variants={imageVariants}
-        src={`https://images.unsplash.com/${images[index]}?auto=format&fit=crop&w=1500`}
-        alt="The Barbican"
+        src={`https://images.unsplash.com/${
+          images[props.index]
+        }?auto=format&fit=crop&w=1500`}
+        alt='The Barbican'
       />
-      <motion.div className="back" variants={backVariants}>
-        <Link href="/">
+      <motion.div className='back' variants={backVariants}>
+        <Link href='/'>
           <a>← Back</a>
         </Link>
       </motion.div>
