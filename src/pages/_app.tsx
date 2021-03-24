@@ -1,5 +1,8 @@
+import { Provider } from 'urql'
+import { client } from '../utils/urqlClient'
 import { AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
+import { AppProps } from 'next/app'
 
 function handleExitComplete() {
   if (typeof window !== 'undefined') {
@@ -7,10 +10,10 @@ function handleExitComplete() {
   }
 }
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
   return (
-    <>
+    <Provider value={client}>
       <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
         <Component {...pageProps} key={router.route} />
       </AnimatePresence>
@@ -30,7 +33,7 @@ function MyApp({ Component, pageProps }) {
         }
       `}
       </style>
-    </>
+    </Provider>
   )
 }
 
