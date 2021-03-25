@@ -1,0 +1,25 @@
+query CriticScores($options: PaginatedQueryOptions!) {
+  highestCriticScores(options: $options) {
+    rows {
+      global_sales
+      na_sales
+      eu_sales
+      jp_sales
+      other_sales
+      console
+      year_of_release
+      genre
+      rating
+      publisher
+      ## fields unique to querying individual titles
+      id
+      title
+      developer
+      critic_score
+      critic_count
+      user_score
+      user_count
+    }
+    hasMore
+  }
+}

@@ -1,0 +1,19 @@
+query CrossPlatformSales($options: PaginatedQueryOptions!) {
+  salesByCrossPlatformTitles(options: $options) {
+    rows {
+      global_sales
+      na_sales
+      eu_sales
+      jp_sales
+      other_sales
+      console
+      year_of_release
+      genre
+      rating
+      publisher
+      ## cross-platform titles can provide the title field
+      title
+    }
+    hasMore
+  }
+}

@@ -1,9 +1,9 @@
-import { useGenreSalesByQuery } from '../generated/graphql'
+import { useGenreSalesQuery } from '../generated/graphql'
 
 // quick test of graphql connection
 
 const Sales = () => {
-  const [res] = useGenreSalesByQuery({
+  const [res] = useGenreSalesQuery({
     variables: {
       options: { limit: 10, offset: 0, where: { titleContains: ['super'] } },
     },
@@ -20,7 +20,7 @@ const Sales = () => {
         <ul>
           {data.salesByGenre.rows.map((x) => (
             <li>
-              {x.genre}, {x.global_sales} global sales
+              {x.genre}, {x.global_sales}m global sales
             </li>
           ))}
         </ul>

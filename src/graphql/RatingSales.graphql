@@ -1,0 +1,17 @@
+query RatingSales($options: PaginatedQueryOptions!) {
+  salesByRating(options: $options) {
+    rows {
+      global_sales
+      na_sales
+      eu_sales
+      jp_sales
+      other_sales
+      console
+      year_of_release
+      genre
+      rating
+      publisher
+    }
+    hasMore
+  }
+}

@@ -367,45 +367,601 @@ export type Console_Makers = {
   maker: Scalars['String']
 }
 
-export type SalesResponseFragment = { __typename?: 'GenreSales' } & Pick<
-  GenreSales,
-  'genre' | 'global_sales'
->
-
-export type GenreSalesByQueryVariables = Exact<{
+export type ConsoleSalesQueryVariables = Exact<{
   options: PaginatedQueryOptions
 }>
 
-export type GenreSalesByQuery = { __typename?: 'Query' } & {
+export type ConsoleSalesQuery = { __typename?: 'Query' } & {
+  salesByConsole: { __typename?: 'PaginatedConsoleGameSales' } & Pick<
+    PaginatedConsoleGameSales,
+    'hasMore'
+  > & {
+      rows: Array<
+        { __typename?: 'ConsoleGameSales' } & Pick<
+          ConsoleGameSales,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+        >
+      >
+    }
+}
+
+export type CriticScoresQueryVariables = Exact<{
+  options: PaginatedQueryOptions
+}>
+
+export type CriticScoresQuery = { __typename?: 'Query' } & {
+  highestCriticScores: { __typename?: 'PaginatedGames' } & Pick<
+    PaginatedGames,
+    'hasMore'
+  > & {
+      rows: Array<
+        { __typename?: 'GAMES' } & Pick<
+          Games,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+          | 'id'
+          | 'title'
+          | 'developer'
+          | 'critic_score'
+          | 'critic_count'
+          | 'user_score'
+          | 'user_count'
+        >
+      >
+    }
+}
+
+export type CrossPlatformSalesQueryVariables = Exact<{
+  options: PaginatedQueryOptions
+}>
+
+export type CrossPlatformSalesQuery = { __typename?: 'Query' } & {
+  salesByCrossPlatformTitles: {
+    __typename?: 'PaginatedCrossPlatformSales'
+  } & Pick<PaginatedCrossPlatformSales, 'hasMore'> & {
+      rows: Array<
+        { __typename?: 'CrossPlatformSales' } & Pick<
+          CrossPlatformSales,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+          | 'title'
+        >
+      >
+    }
+}
+
+export type GameSalesQueryVariables = Exact<{
+  options: PaginatedQueryOptions
+}>
+
+export type GameSalesQuery = { __typename?: 'Query' } & {
+  salesByTitles: { __typename?: 'PaginatedGames' } & Pick<
+    PaginatedGames,
+    'hasMore'
+  > & {
+      rows: Array<
+        { __typename?: 'GAMES' } & Pick<
+          Games,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+          | 'id'
+          | 'title'
+          | 'developer'
+          | 'critic_score'
+          | 'critic_count'
+          | 'user_score'
+          | 'user_count'
+        >
+      >
+    }
+}
+
+export type GamesListQueryVariables = Exact<{
+  options: PaginatedQueryOptions
+}>
+
+export type GamesListQuery = { __typename?: 'Query' } & {
+  games: { __typename?: 'PaginatedGames' } & Pick<PaginatedGames, 'hasMore'> & {
+      rows: Array<
+        { __typename?: 'GAMES' } & Pick<
+          Games,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+          | 'id'
+          | 'title'
+          | 'developer'
+          | 'critic_score'
+          | 'critic_count'
+          | 'user_score'
+          | 'user_count'
+        >
+      >
+    }
+}
+
+export type GenreSalesQueryVariables = Exact<{
+  options: PaginatedQueryOptions
+}>
+
+export type GenreSalesQuery = { __typename?: 'Query' } & {
   salesByGenre: { __typename?: 'PaginatedGenreSales' } & Pick<
     PaginatedGenreSales,
     'hasMore'
-  > & { rows: Array<{ __typename?: 'GenreSales' } & SalesResponseFragment> }
+  > & {
+      rows: Array<
+        { __typename?: 'GenreSales' } & Pick<
+          GenreSales,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+        >
+      >
+    }
 }
 
-export const SalesResponseFragmentDoc = gql`
-  fragment SalesResponse on GenreSales {
-    genre
-    global_sales
-  }
-`
-export const GenreSalesByDocument = gql`
-  query GenreSalesBy($options: PaginatedQueryOptions!) {
-    salesByGenre(options: $options) {
+export type PublisherSalesQueryVariables = Exact<{
+  options: PaginatedQueryOptions
+}>
+
+export type PublisherSalesQuery = { __typename?: 'Query' } & {
+  salesByPublisher: { __typename?: 'PaginatedPublisherSales' } & Pick<
+    PaginatedPublisherSales,
+    'hasMore'
+  > & {
+      rows: Array<
+        { __typename?: 'PublisherSales' } & Pick<
+          PublisherSales,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+        >
+      >
+    }
+}
+
+export type RatingSalesQueryVariables = Exact<{
+  options: PaginatedQueryOptions
+}>
+
+export type RatingSalesQuery = { __typename?: 'Query' } & {
+  salesByRating: { __typename?: 'PaginatedRatingSales' } & Pick<
+    PaginatedRatingSales,
+    'hasMore'
+  > & {
+      rows: Array<
+        { __typename?: 'RatingSales' } & Pick<
+          RatingSales,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+        >
+      >
+    }
+}
+
+export type UserScoresQueryVariables = Exact<{
+  options: PaginatedQueryOptions
+}>
+
+export type UserScoresQuery = { __typename?: 'Query' } & {
+  highestUserScores: { __typename?: 'PaginatedGames' } & Pick<
+    PaginatedGames,
+    'hasMore'
+  > & {
+      rows: Array<
+        { __typename?: 'GAMES' } & Pick<
+          Games,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+          | 'id'
+          | 'title'
+          | 'developer'
+          | 'critic_score'
+          | 'critic_count'
+          | 'user_score'
+          | 'user_count'
+        >
+      >
+    }
+}
+
+export type YearSalesQueryVariables = Exact<{
+  options: PaginatedQueryOptions
+}>
+
+export type YearSalesQuery = { __typename?: 'Query' } & {
+  salesByYear: { __typename?: 'PaginatedYearSales' } & Pick<
+    PaginatedYearSales,
+    'hasMore'
+  > & {
+      rows: Array<
+        { __typename?: 'YearSales' } & Pick<
+          YearSales,
+          | 'global_sales'
+          | 'na_sales'
+          | 'eu_sales'
+          | 'jp_sales'
+          | 'other_sales'
+          | 'console'
+          | 'year_of_release'
+          | 'genre'
+          | 'rating'
+          | 'publisher'
+        >
+      >
+    }
+}
+
+export const ConsoleSalesDocument = gql`
+  query ConsoleSales($options: PaginatedQueryOptions!) {
+    salesByConsole(options: $options) {
       rows {
-        ...SalesResponse
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
       }
       hasMore
     }
   }
-  ${SalesResponseFragmentDoc}
 `
 
-export function useGenreSalesByQuery(
-  options: Omit<Urql.UseQueryArgs<GenreSalesByQueryVariables>, 'query'> = {}
+export function useConsoleSalesQuery(
+  options: Omit<Urql.UseQueryArgs<ConsoleSalesQueryVariables>, 'query'> = {}
 ) {
-  return Urql.useQuery<GenreSalesByQuery>({
-    query: GenreSalesByDocument,
+  return Urql.useQuery<ConsoleSalesQuery>({
+    query: ConsoleSalesDocument,
     ...options,
   })
+}
+export const CriticScoresDocument = gql`
+  query CriticScores($options: PaginatedQueryOptions!) {
+    highestCriticScores(options: $options) {
+      rows {
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
+        id
+        title
+        developer
+        critic_score
+        critic_count
+        user_score
+        user_count
+      }
+      hasMore
+    }
+  }
+`
+
+export function useCriticScoresQuery(
+  options: Omit<Urql.UseQueryArgs<CriticScoresQueryVariables>, 'query'> = {}
+) {
+  return Urql.useQuery<CriticScoresQuery>({
+    query: CriticScoresDocument,
+    ...options,
+  })
+}
+export const CrossPlatformSalesDocument = gql`
+  query CrossPlatformSales($options: PaginatedQueryOptions!) {
+    salesByCrossPlatformTitles(options: $options) {
+      rows {
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
+        title
+      }
+      hasMore
+    }
+  }
+`
+
+export function useCrossPlatformSalesQuery(
+  options: Omit<
+    Urql.UseQueryArgs<CrossPlatformSalesQueryVariables>,
+    'query'
+  > = {}
+) {
+  return Urql.useQuery<CrossPlatformSalesQuery>({
+    query: CrossPlatformSalesDocument,
+    ...options,
+  })
+}
+export const GameSalesDocument = gql`
+  query GameSales($options: PaginatedQueryOptions!) {
+    salesByTitles(options: $options) {
+      rows {
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
+        id
+        title
+        developer
+        critic_score
+        critic_count
+        user_score
+        user_count
+      }
+      hasMore
+    }
+  }
+`
+
+export function useGameSalesQuery(
+  options: Omit<Urql.UseQueryArgs<GameSalesQueryVariables>, 'query'> = {}
+) {
+  return Urql.useQuery<GameSalesQuery>({ query: GameSalesDocument, ...options })
+}
+export const GamesListDocument = gql`
+  query GamesList($options: PaginatedQueryOptions!) {
+    games(options: $options) {
+      rows {
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
+        id
+        title
+        developer
+        critic_score
+        critic_count
+        user_score
+        user_count
+      }
+      hasMore
+    }
+  }
+`
+
+export function useGamesListQuery(
+  options: Omit<Urql.UseQueryArgs<GamesListQueryVariables>, 'query'> = {}
+) {
+  return Urql.useQuery<GamesListQuery>({ query: GamesListDocument, ...options })
+}
+export const GenreSalesDocument = gql`
+  query GenreSales($options: PaginatedQueryOptions!) {
+    salesByGenre(options: $options) {
+      rows {
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
+      }
+      hasMore
+    }
+  }
+`
+
+export function useGenreSalesQuery(
+  options: Omit<Urql.UseQueryArgs<GenreSalesQueryVariables>, 'query'> = {}
+) {
+  return Urql.useQuery<GenreSalesQuery>({
+    query: GenreSalesDocument,
+    ...options,
+  })
+}
+export const PublisherSalesDocument = gql`
+  query PublisherSales($options: PaginatedQueryOptions!) {
+    salesByPublisher(options: $options) {
+      rows {
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
+      }
+      hasMore
+    }
+  }
+`
+
+export function usePublisherSalesQuery(
+  options: Omit<Urql.UseQueryArgs<PublisherSalesQueryVariables>, 'query'> = {}
+) {
+  return Urql.useQuery<PublisherSalesQuery>({
+    query: PublisherSalesDocument,
+    ...options,
+  })
+}
+export const RatingSalesDocument = gql`
+  query RatingSales($options: PaginatedQueryOptions!) {
+    salesByRating(options: $options) {
+      rows {
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
+      }
+      hasMore
+    }
+  }
+`
+
+export function useRatingSalesQuery(
+  options: Omit<Urql.UseQueryArgs<RatingSalesQueryVariables>, 'query'> = {}
+) {
+  return Urql.useQuery<RatingSalesQuery>({
+    query: RatingSalesDocument,
+    ...options,
+  })
+}
+export const UserScoresDocument = gql`
+  query UserScores($options: PaginatedQueryOptions!) {
+    highestUserScores(options: $options) {
+      rows {
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
+        id
+        title
+        developer
+        critic_score
+        critic_count
+        user_score
+        user_count
+      }
+      hasMore
+    }
+  }
+`
+
+export function useUserScoresQuery(
+  options: Omit<Urql.UseQueryArgs<UserScoresQueryVariables>, 'query'> = {}
+) {
+  return Urql.useQuery<UserScoresQuery>({
+    query: UserScoresDocument,
+    ...options,
+  })
+}
+export const YearSalesDocument = gql`
+  query YearSales($options: PaginatedQueryOptions!) {
+    salesByYear(options: $options) {
+      rows {
+        global_sales
+        na_sales
+        eu_sales
+        jp_sales
+        other_sales
+        console
+        year_of_release
+        genre
+        rating
+        publisher
+      }
+      hasMore
+    }
+  }
+`
+
+export function useYearSalesQuery(
+  options: Omit<Urql.UseQueryArgs<YearSalesQueryVariables>, 'query'> = {}
+) {
+  return Urql.useQuery<YearSalesQuery>({ query: YearSalesDocument, ...options })
 }
