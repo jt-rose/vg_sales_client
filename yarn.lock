@@ -518,7 +518,7 @@
     ts-node "^9"
     tslib "^2"
 
-"@graphql-codegen/cli@^1.21.3":
+"@graphql-codegen/cli@1.21.3":
   version "1.21.3"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-1.21.3.tgz#3506c5d019c6995be1927bd4d9c67a739fafe5e6"
   integrity sha512-jwg0mKhseg0QI4/T4IQcttTBCZgnahiTWqnYWIK+E8nrbXCE9o2hxvaYin/Kq9+5oFtxDePED56cjVs/ESRw6g==
@@ -574,7 +574,7 @@
     "@graphql-tools/utils" "^6"
     tslib "~2.0.1"
 
-"@graphql-codegen/plugin-helpers@^1.18.2", "@graphql-codegen/plugin-helpers@^1.18.4":
+"@graphql-codegen/plugin-helpers@^1.18.2", "@graphql-codegen/plugin-helpers@^1.18.3", "@graphql-codegen/plugin-helpers@^1.18.4":
   version "1.18.4"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-1.18.4.tgz#0adc4c0f88386a50b7a69d358080b6ee54fc3b16"
   integrity sha512-dpfhUmn9GOS8ByoOPIN3V4Nn9HX7sl9NR7Hf26TgN6Clg7cQvkT6XjHdS2e56Q3kWrxZT1zJ1sEa67D3tj9ZtQ==
@@ -583,6 +583,17 @@
     common-tags "1.8.0"
     import-from "3.0.0"
     lodash "~4.17.20"
+    tslib "~2.1.0"
+
+"@graphql-codegen/typescript-operations@^1.17.15":
+  version "1.17.15"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-1.17.15.tgz#c992e29ead1cf5c3f65dbbe1f522b09be30c36d6"
+  integrity sha512-HStWj3mUe+0ir2J0jqgjegrvcO1DIe2gzsoBBo9RHIYwyaxedUivxXvWY9XBfKpHv6sLa/ST1iYGeedrJELPtw==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^1.18.3"
+    "@graphql-codegen/typescript" "^1.21.1"
+    "@graphql-codegen/visitor-plugin-common" "^1.19.0"
+    auto-bind "~4.0.0"
     tslib "~2.1.0"
 
 "@graphql-codegen/typescript-urql@^2.0.5":
@@ -596,7 +607,17 @@
     change-case-all "1.0.12"
     tslib "~2.1.0"
 
-"@graphql-codegen/visitor-plugin-common@^1.19.1":
+"@graphql-codegen/typescript@1.21.1", "@graphql-codegen/typescript@^1.21.1":
+  version "1.21.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-1.21.1.tgz#9bce3254b8ef30a6bf64e57ba3991f9be7a19b53"
+  integrity sha512-JF6Vsu5HSv3dAoS2ca3PFLUN0qVxotex/+BgWw/6SKhtd83MUPnzJ/RU3lACg4vuNTCWeQSeGvg8x5qrw9Go9w==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^1.18.3"
+    "@graphql-codegen/visitor-plugin-common" "^1.19.0"
+    auto-bind "~4.0.0"
+    tslib "~2.1.0"
+
+"@graphql-codegen/visitor-plugin-common@^1.19.0", "@graphql-codegen/visitor-plugin-common@^1.19.1":
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.19.1.tgz#2584588351a343a2ad8cd76dde62eb2ec25abe18"
   integrity sha512-MJZXe5vXxV6PLOgHhQoz93gnjzJtbnVQXQKqVEcbyB9W8ImoKuTHsEf/eJ6yCL79f7X/2dnOOM84d5Osh1eaKg==

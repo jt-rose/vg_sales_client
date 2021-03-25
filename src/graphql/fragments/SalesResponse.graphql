@@ -1,0 +1,4 @@
+fragment SalesResponse on GenreSales {
+  genre
+  global_sales
+}

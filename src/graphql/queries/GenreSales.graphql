@@ -1,0 +1,8 @@
+query GenreSalesBy($options: PaginatedQueryOptions!) {
+  salesByGenre(options: $options) {
+    rows {
+      ...SalesResponse
+    }
+    hasMore
+  }
+}
