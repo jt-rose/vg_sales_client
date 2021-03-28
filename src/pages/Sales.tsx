@@ -1,5 +1,6 @@
 import { useGenreSalesQuery } from '../generated/graphql'
-
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from 'victory'
+import { BarChart, BarChartProps } from '../components/BarChart'
 // quick test of graphql connection
 
 const Sales = () => {
@@ -17,13 +18,31 @@ const Sales = () => {
       {error && <p>Oh no! {error.message}</p>}
       {fetching && <p>...fetching</p>}
       {data && (
-        <ul>
-          {data.salesByGenre.rows.map((x) => (
-            <li>
-              {x.genre}, {x.global_sales}m global sales
-            </li>
-          ))}
-        </ul>
+        /*<VictoryChart
+          singleQuadrantDomainPadding
+          domainPadding={20}
+          theme={VictoryTheme.material}
+        >
+          <VictoryAxis
+            style={{ tickLabels: { angle: -60, fontSize: 4 } }}
+            tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+            tickFormat={data.salesByGenre.rows.map((x) => x.genre)}
+          />
+          <VictoryAxis dependentAxis tickFormat={(x) => `${x}m`} />
+          <VictoryBar
+            style={{ data: { fill: 'red' } }}
+            alignment='middle'
+            data={data.salesByGenre.rows.map((x, i) => ({
+              x: `${i}`, //x.genre,
+              y: x.global_sales,
+            }))}
+          />
+        </VictoryChart>*/
+        <BarChart
+          chartData={data.salesByGenre.rows.map(
+            (x) => new BarChartProps(x.global_sales, x.genre)
+          )}
+        />
       )}
     </div>
   )
