@@ -1,14 +1,24 @@
-import { useGenreSalesQuery } from '../generated/graphql'
-import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from 'victory'
-import { BarChart, BarChartProps } from '../components/BarChart'
+import { useGenreSalesQuery, Column } from '../generated/graphql'
+import {
+  BarChart,
+  BarChartProps,
+  formatQueryType,
+} from '../components/BarChart'
 // quick test of graphql connection
 
+// hoc (query, resultName, field)
 const Sales = () => {
   const [res] = useGenreSalesQuery({
     variables: {
-      options: { limit: 10, offset: 0, where: { titleContains: ['super'] } },
+      options: {
+        limit: 10,
+        offset: 0,
+        where: { titleContains: ['super'] },
+        groupBy: [Column.Genre],
+      },
     },
   })
+  //const query = formatQueryType('genre')
   const { data, fetching, error } = res
   console.log(data)
   return (
@@ -40,7 +50,7 @@ const Sales = () => {
         </VictoryChart>*/
         <BarChart
           chartData={data.salesByGenre.rows.map(
-            (x) => new BarChartProps(x.global_sales, x.genre)
+            (res) => new BarChartProps(res.global_sales, res.genre)
           )}
         />
       )}

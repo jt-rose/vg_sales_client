@@ -12,6 +12,11 @@ query ConsoleSales($options: PaginatedQueryOptions!) {
       rating
       publisher
     }
+    groupedBy
+    orderedBy {
+      column
+      order
+    }
     hasMore
   }
 }

@@ -1,5 +1,16 @@
 import { VictoryChart, VictoryTheme, VictoryAxis, VictoryBar } from 'victory'
 
+export const formatQueryType = (type: 'genre' | 'year_of_release') => {
+  switch (type) {
+    case 'genre':
+      return { type, name: 'salesByGenre' }
+    case 'year_of_release':
+      return { type, name: 'salesByYear' }
+    default:
+      throw new Error('wrong query type!')
+  }
+}
+
 export class BarChartProps {
   sales: number
   xAxisTitle: string

@@ -20,6 +20,11 @@ query UserScores($options: PaginatedQueryOptions!) {
       user_score
       user_count
     }
+    groupedBy
+    orderedBy {
+      column
+      order
+    }
     hasMore
   }
 }
