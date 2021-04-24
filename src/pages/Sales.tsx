@@ -48,11 +48,25 @@ const Sales = () => {
             }))}
           />
         </VictoryChart>*/
-        <BarChart
-          chartData={data.salesByGenre.rows.map(
-            (res) => new BarChartProps(res.global_sales, res.genre)
-          )}
-        />
+        <div>
+          <ul>
+            {data.salesByGenre.rows.map((r) => (
+              <li>
+                {r.genre}: {r.global_sales}
+              </li>
+            ))}
+          </ul>
+          <p>Grouped By: {`${[...new Set(data.salesByGenre.groupedBy)]}`}</p>
+          <p>
+            Ordered By: {`${data.salesByGenre.orderedBy.map((x) => x.column)}`}
+          </p>
+          <p>has more?: {`${data.salesByGenre.hasMore}`}</p>
+          <BarChart
+            chartData={data.salesByGenre.rows.map(
+              (res) => new BarChartProps(res.global_sales, res.genre)
+            )}
+          />
+        </div>
       )}
     </div>
   )
