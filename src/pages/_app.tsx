@@ -4,6 +4,8 @@ import { AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { AppProps } from 'next/app'
 
+import '../styles/globals.css'
+
 function handleExitComplete() {
   if (typeof window !== 'undefined') {
     window.scrollTo({ top: 0 })

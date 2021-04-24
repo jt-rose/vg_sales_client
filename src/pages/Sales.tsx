@@ -2,7 +2,7 @@ import { useGenreSalesQuery, Column } from '../generated/graphql'
 import {
   BarChart,
   BarChartProps,
-  formatQueryType,
+  //formatQueryType,
 } from '../components/BarChart'
 // quick test of graphql connection
 
@@ -51,7 +51,7 @@ const Sales = () => {
         <div>
           <ul>
             {data.salesByGenre.rows.map((r) => (
-              <li>
+              <li className='text-green-300'>
                 {r.genre}: {r.global_sales}
               </li>
             ))}
@@ -61,6 +61,7 @@ const Sales = () => {
             Ordered By: {`${data.salesByGenre.orderedBy.map((x) => x.column)}`}
           </p>
           <p>has more?: {`${data.salesByGenre.hasMore}`}</p>
+
           <BarChart
             chartData={data.salesByGenre.rows.map(
               (res) => new BarChartProps(res.global_sales, res.genre)
