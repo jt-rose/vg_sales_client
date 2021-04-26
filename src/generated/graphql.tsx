@@ -227,10 +227,7 @@ export type PaginatedQueryOptions = {
 };
 
 export type WhereOptions = {
-  title?: Maybe<Array<Scalars['String']>>;
-  titleStartsWith?: Maybe<Array<Scalars['String']>>;
-  titleEndsWith?: Maybe<Array<Scalars['String']>>;
-  titleContains?: Maybe<Array<Scalars['String']>>;
+  title?: Maybe<TextSearch>;
   console?: Maybe<Array<Console>>;
   year_of_release?: Maybe<Array<Scalars['Int']>>;
   publisher?: Maybe<Array<Scalars['String']>>;
@@ -245,6 +242,19 @@ export type WhereOptions = {
   jp_sales?: Maybe<Array<Scalars['Float']>>;
   other_sales?: Maybe<Array<Scalars['Float']>>;
 };
+
+export type TextSearch = {
+  searchText: Array<Scalars['String']>;
+  searchType: TextSearchType;
+};
+
+/** distinguish between searching for exact text, text appearing at start, at end, or included anywhere */
+export enum TextSearchType {
+  Equals = 'EQUALS',
+  Contains = 'CONTAINS',
+  Startswith = 'STARTSWITH',
+  Endswith = 'ENDSWITH'
+}
 
 export type OrderByColumnInput = {
   column: OrderByColumns;
