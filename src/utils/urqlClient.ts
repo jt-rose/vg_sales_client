@@ -1,5 +1,5 @@
 import { createClient } from 'urql'
 
 export const client = createClient({
-  url: 'http://localhost:5000/graphql',
+  url: 'http://localhost:8000/graphql',
 })
