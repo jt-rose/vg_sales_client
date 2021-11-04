@@ -33,7 +33,7 @@ const Thumbnail = (data: { id: string; i: number }) => (
         variants={frameVariants}
         transition={transition}
       >
-        <Link href='/image/[index]' as={`/image/${data.i}`} scroll={false}>
+        <Link href='/image/[index]' passHref as={`/image/${data.i}`} scroll={false}>
           <motion.img
             src={`https://images.unsplash.com/${data.id}?auto=format&fit=crop&w=1500`}
             alt='The Barbican'

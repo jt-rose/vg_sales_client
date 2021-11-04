@@ -1,6 +1,6 @@
 import {
   useGenreSalesQuery,
-  Column,
+  //Column,
   PaginatedQueryOptions,
 } from '../generated/graphql'
 import {
@@ -58,7 +58,8 @@ const Sales = () => {
           <QueryForm updateOptions={updateOptions} />
           <ul>
             {data.salesByGenre.rows.map((r) => (
-              <li className='text-green-300'>
+              <li className='text-green-300'
+                key={r.global_sales}>
                 {r.genre}: {r.global_sales}
               </li>
             ))}

@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import { Dispatch, SetStateAction } from 'react'
+//import { Dispatch, SetStateAction } from 'react'
 import { Column } from '../generated/graphql'
 
 export const QueryForm = (props: { updateOptions: any }) => {
