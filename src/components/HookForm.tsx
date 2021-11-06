@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
-import { Console, TextSearchType/*useGenreSalesQuery, PaginatedQueryOptions*/ } from '../generated/graphql'
-
+import { Console, Genre, TextSearchType/*useGenreSalesQuery, PaginatedQueryOptions*/ } from '../generated/graphql'
+import { InputGroup, InputLeftAddon, Input } from '@chakra-ui/react'
 
 type FormData = {
     title?: string
@@ -10,12 +10,11 @@ type FormData = {
     endingYear: number
     publishers: string[]
     developers: string[]
+    genres: string[]
 
 
 }
 
-// expand later
-const consoleList = ['PS2', 'PS3']
 
 export const HookForm = () => {
     const { register, handleSubmit } = useForm<FormData>()
@@ -38,17 +37,23 @@ export const HookForm = () => {
 
     return (
         <form onSubmit={onSubmit}>
-            <label htmlFor='title'>Title:</label>
-            <input {...register('title')} id='title'/>
+            <InputGroup>
+            <InputLeftAddon children='Title' />
+            <Input {...register('title')} />
+            </InputGroup>
+            
             <select {...register('textSearchType')}>
-                <option value='startsWith'>Starts With</option>
-                <option value='endsWith'>Ends With</option>
+        {Object.keys(TextSearchType).map(searchType => (
+            <option value={searchType} key={searchType}>{searchType}</option>
+        ))}
             </select>
 
             <label htmlFor='consoles'>Consoles:</label>
                 <select {...register('consoles')} id='consoles'>
         <option value={undefined}>Select...</option>
-        {consoleList.map(console => (<option value={console} key={console}>{console}</option>))}
+        {Object.keys(Console).map(console => (
+            <option value={console} key={console}>{console}</option>
+        ))}
                 </select>
                 <label htmlFor='years'>Years:</label>
                 <select {...register('startingYear') } defaultValue={1900}>
@@ -67,8 +72,15 @@ export const HookForm = () => {
 {/* add search suggestion */}
 <label htmlFor='developers'>Developers:</label>
             <input {...register('developers')} id='developers'/>
+
+            <label htmlFor='genres'>Genres:</label>
+                <select {...register('genres')} id='genres'>
+        <option value={undefined}>Select...</option>
+        {Object.keys(Genre).map(genre => (
+            <option value={genre} key={genre}>{genre}</option>
+        ))}
+        </select>
 {/* 
-// genre
 // rating
 
 // critic UserScore

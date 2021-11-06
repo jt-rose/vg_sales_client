@@ -9,12 +9,12 @@ import {
   //formatQueryType,
 } from '../components/BarChart'
 // quick test of graphql connection
-import { QueryForm } from '../components/QueryForm'
 import { useState } from 'react'
+import { HookForm } from '../components/HookForm'
 
 // hoc (query, resultName, field)
 const Sales = () => {
-  const [options, updateOptions] = useState<PaginatedQueryOptions>({
+  const [options, /*updateOptions*/] = useState<PaginatedQueryOptions>({
     where: {},
     limit: 10,
     offset: 0,
@@ -24,6 +24,7 @@ const Sales = () => {
       options,
     },
   })
+  
   //const query = formatQueryType('genre')
   const { data, fetching, error } = res
   console.log(data)
@@ -55,7 +56,8 @@ const Sales = () => {
           />
         </VictoryChart>*/
         <div>
-          <QueryForm updateOptions={updateOptions} />
+          <HookForm />
+          <br />
           <ul>
             {data.salesByGenre.rows.map((r) => (
               <li className='text-green-300'
