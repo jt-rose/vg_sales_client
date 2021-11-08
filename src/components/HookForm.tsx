@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Console, Genre, TextSearchType/*useGenreSalesQuery, PaginatedQueryOptions*/ } from '../generated/graphql'
-import { InputGroup, InputLeftAddon, Input } from '@chakra-ui/react'
+import { FormLabel, Input, RadioGroup, Stack, Radio } from '@chakra-ui/react'
 
 type FormData = {
     title?: string
@@ -29,7 +30,7 @@ export const HookForm = () => {
         },
       })*/
       
-
+      const [ textSearchType, changeTextSearchType] = useState<string>(TextSearchType.Equals)
     const onSubmit = handleSubmit((data) => {
 
         console.log(data)
@@ -37,16 +38,23 @@ export const HookForm = () => {
 
     return (
         <form onSubmit={onSubmit}>
-            <InputGroup>
-            <InputLeftAddon children='Title' />
-            <Input {...register('title')} />
-            </InputGroup>
+            {/*    Title Input     */}
+            <FormLabel htmlFor='title'>Title</FormLabel>
+            <Input 
+            key='title-input'
+            placeHolder='Enter a title to search for...'
+            {...register('title')} 
+            />
             
-            <select {...register('textSearchType')}>
-        {Object.keys(TextSearchType).map(searchType => (
-            <option value={searchType} key={searchType}>{searchType}</option>
-        ))}
-            </select>
+            {/*    Text Search Type Input     */}
+            <RadioGroup onChange={changeTextSearchType} value={textSearchType}>
+                <Stack direction='row'>
+                <Radio value={TextSearchType.Equals}>equals</Radio>
+                <Radio value={TextSearchType.Contains}>contains</Radio>
+                <Radio value={TextSearchType.Startswith}>starts with</Radio>
+                <Radio value={TextSearchType.Endswith}>ends with</Radio>
+                </Stack>
+            </RadioGroup>
 
             <label htmlFor='consoles'>Consoles:</label>
                 <select {...register('consoles')} id='consoles'>
