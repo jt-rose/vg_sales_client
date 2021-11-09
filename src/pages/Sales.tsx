@@ -10,7 +10,6 @@ import {
 } from "../components/BarChart";
 // quick test of graphql connection
 import { useState } from "react";
-import { HookForm } from "../components/HookForm";
 import { QueryForm } from "../components/form/QueryForm";
 
 // hoc (query, resultName, field)
@@ -58,8 +57,6 @@ const Sales = () => {
         </VictoryChart>*/
         <div>
           <QueryForm />
-          <br />
-          <HookForm />
           <br />
           <ul>
             {data.salesByGenre.rows.map((r) => (
