@@ -1,6 +1,7 @@
 import { Stack, Heading /*useRangeSlider*/ } from "@chakra-ui/react";
 import { TextSearchType, Rating } from "../../generated/graphql";
 //import { RegisterOptions, useForm } from "react-hook-form";
+import { ScoreForm } from "./ScoreForm";
 import { SalesForm } from "./SalesForm";
 import { useState } from "react";
 
@@ -30,6 +31,12 @@ export type FormData = {
 export const QueryForm = () => {
   //const { register, handleSubmit } = useForm<FormData>();
 
+  // set up state for critic and user scores
+  const [criticScoresRange, updateCriticScoresRange] = useState<number[]>([
+    1, 100,
+  ]);
+  const [userScoresRange, updateUserScoresRange] = useState<number[]>([1, 100]);
+
   // set up state for sales regions
   const [globalSales, updateGlobalSales] = useState<number[]>([1, 100]);
   const [NASales, updateNASales] = useState<number[]>([1, 100]);
@@ -52,7 +59,12 @@ export const QueryForm = () => {
       <Stack>
         <Heading>Query Form</Heading>
         <div>Game</div>
-        <div>Scores</div>
+        <ScoreForm
+          criticScoresRange={criticScoresRange}
+          updateCriticScoresRange={updateCriticScoresRange}
+          userScoresRange={userScoresRange}
+          updateUserScoresRange={updateUserScoresRange}
+        />
         <SalesForm
           globalSales={globalSales}
           updateGlobalSales={updateGlobalSales}
