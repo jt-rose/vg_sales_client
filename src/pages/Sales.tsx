@@ -2,32 +2,33 @@ import {
   useGenreSalesQuery,
   //Column,
   PaginatedQueryOptions,
-} from '../generated/graphql'
+} from "../generated/graphql";
 import {
   BarChart,
   BarChartProps,
   //formatQueryType,
-} from '../components/BarChart'
+} from "../components/BarChart";
 // quick test of graphql connection
-import { useState } from 'react'
-import { HookForm } from '../components/HookForm'
+import { useState } from "react";
+import { HookForm } from "../components/HookForm";
+import { QueryForm } from "../components/form/QueryForm";
 
 // hoc (query, resultName, field)
 const Sales = () => {
-  const [options, /*updateOptions*/] = useState<PaginatedQueryOptions>({
+  const [options /*updateOptions*/] = useState<PaginatedQueryOptions>({
     where: {},
     limit: 10,
     offset: 0,
-  })
+  });
   const [res] = useGenreSalesQuery({
     variables: {
       options,
     },
-  })
-  
+  });
+
   //const query = formatQueryType('genre')
-  const { data, fetching, error } = res
-  console.log(data)
+  const { data, fetching, error } = res;
+  console.log(data);
   return (
     <div>
       <h1>Sales</h1>
@@ -56,12 +57,13 @@ const Sales = () => {
           />
         </VictoryChart>*/
         <div>
+          <QueryForm />
+          <br />
           <HookForm />
           <br />
           <ul>
             {data.salesByGenre.rows.map((r) => (
-              <li className='text-green-300'
-                key={r.global_sales}>
+              <li className="text-green-300" key={r.global_sales}>
                 {r.genre}: {r.global_sales}
               </li>
             ))}
@@ -80,7 +82,7 @@ const Sales = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Sales
+export default Sales;
