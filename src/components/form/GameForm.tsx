@@ -64,6 +64,16 @@ export const GameForm = (props: { register: FormRegister }) => {
         ))}
       </select>
 
+      <label htmlFor="genres">Genres:</label>
+      <select {...register("genres")} id="genres">
+        <option value={undefined}>Select...</option>
+        {Object.keys(Genre).map((genre) => (
+          <option value={genre} key={genre}>
+            {genre}
+          </option>
+        ))}
+      </select>
+
       <FormLabel htmlFor="years">Years</FormLabel>
       <Flex>
         <Select
@@ -87,18 +97,7 @@ export const GameForm = (props: { register: FormRegister }) => {
         </Select>
       </Flex>
 
-      <label htmlFor="years">Years:</label>
-      <select {...register("startingYear")} defaultValue={1900}>
-        <option value={1970} key={"startingYear"}>
-          1970
-        </option>
-      </select>
-      {" - "}
-      <select {...register("endingYear")} defaultValue={3000}>
-        <option value={3000} key={"endingingYear"}>
-          3000
-        </option>
-      </select>
+      <p>rating</p>
 
       {/* add search suggestion */}
       <FormLabel htmlFor="publishers">Publishers</FormLabel>
@@ -115,18 +114,6 @@ export const GameForm = (props: { register: FormRegister }) => {
         placeHolder="Enter a developer to search for..."
         {...register("developers")}
       />
-
-      <label htmlFor="genres">Genres:</label>
-      <select {...register("genres")} id="genres">
-        <option value={undefined}>Select...</option>
-        {Object.keys(Genre).map((genre) => (
-          <option value={genre} key={genre}>
-            {genre}
-          </option>
-        ))}
-      </select>
-
-      <p>rating</p>
     </div>
   );
 };
