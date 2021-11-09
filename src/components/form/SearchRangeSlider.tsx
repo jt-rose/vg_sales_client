@@ -9,6 +9,7 @@ import { Dispatch, SetStateAction } from "react";
 
 export const SearchRangeSlider = (props: {
   label: string;
+  vertical?: boolean;
   values: number[];
   updateValues: Dispatch<SetStateAction<number[]>>;
 }) => {
@@ -18,6 +19,8 @@ export const SearchRangeSlider = (props: {
       <RangeSlider
         aria-label={["min", "max"]}
         defaultValue={[15, 30]}
+        orientation={props.vertical ? "vertical" : "horizontal"}
+        minH={props.vertical ? 32 : undefined}
         onChangeEnd={(values) => {
           console.log(values);
           props.updateValues(values);
