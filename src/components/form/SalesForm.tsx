@@ -1,40 +1,5 @@
-//import { UseFormRegister } from "react-hook-form";
-//import { FormData } from "./QueryForm";
-import {
-  FormLabel,
-  RangeSlider,
-  RangeSliderTrack,
-  RangeSliderFilledTrack,
-  RangeSliderThumb,
-} from "@chakra-ui/react";
+import { SearchRangeSlider } from "./SearchRangeSlider";
 import { Dispatch, SetStateAction } from "react";
-
-const SalesRangeSlider = (props: {
-  label: string;
-  values: number[];
-  updateValues: Dispatch<SetStateAction<number[]>>;
-}) => {
-  return (
-    <div>
-      <FormLabel htmlFor={props.label}>{props.label}</FormLabel>
-      <RangeSlider
-        aria-label={["min", "max"]}
-        defaultValue={[15, 30]}
-        onChangeEnd={(values) => {
-          console.log(values);
-          props.updateValues(values);
-        }}
-        values={props.values}
-      >
-        <RangeSliderTrack>
-          <RangeSliderFilledTrack />
-        </RangeSliderTrack>
-        <RangeSliderThumb index={0} />
-        <RangeSliderThumb index={1} />
-      </RangeSlider>
-    </div>
-  );
-};
 
 // updateForm: UseFormRegister<FormData>
 export const SalesForm = (props: {
@@ -51,27 +16,27 @@ export const SalesForm = (props: {
 }) => {
   return (
     <div>
-      <SalesRangeSlider
+      <SearchRangeSlider
         label="Global Sales"
         values={props.globalSales}
         updateValues={props.updateGlobalSales}
       />
-      <SalesRangeSlider
+      <SearchRangeSlider
         label="North American Sales"
         values={props.NASales}
         updateValues={props.updateNASales}
       />
-      <SalesRangeSlider
+      <SearchRangeSlider
         label="Japanese Sales"
         values={props.JPNSales}
         updateValues={props.updateJPNSales}
       />
-      <SalesRangeSlider
+      <SearchRangeSlider
         label="European Sales"
         values={props.EUSales}
         updateValues={props.updateEUSales}
       />
-      <SalesRangeSlider
+      <SearchRangeSlider
         label="Other Region Sales"
         values={props.otherRegionSales}
         updateValues={props.updateOtherRegionSales}
