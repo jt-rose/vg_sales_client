@@ -5,6 +5,15 @@ import {
   TabList,
   TabPanels,
   TabPanel,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+  Button,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { GameForm } from "./GameForm";
@@ -17,6 +26,8 @@ import { FormData } from "./FormData";
 // subforms to adjust the search fields
 // according to game, scores, and sales data
 export const QueryForm = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const { register, handleSubmit } = useForm<FormData>();
 
   // set up state for game parameters
@@ -43,55 +54,69 @@ export const QueryForm = () => {
   const [otherRegionSales, updateOtherRegionSales] = useState<number[]>([
     1, 100,
   ]);
-  /*
-  const { state, actions } = useRangeSlider({
-    min: 0,
-    max: 100,
-    defaultValue: [10, 90],
-  });
-  const { value } = state;
-  const { setValueAtIndex } = actions;
-*/
+
   return (
-    <Tabs>
-      <Heading>Query Form</Heading>
-      <TabList>
-        <Tab>Game</Tab>
-        <Tab>Scores</Tab>
-        <Tab>Sales</Tab>
-      </TabList>
-      <form onSubmit={handleSubmit(() => {})}>
-        <TabPanels>
-          <TabPanel>
-            <GameForm register={register} />
-          </TabPanel>
+    <>
+      <Button colorScheme="teal" onClick={onOpen}>
+        Search
+      </Button>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="md">
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>
+            <Heading>Query Form</Heading>
+          </DrawerHeader>
+          <DrawerBody>
+            <Tabs>
+              <TabList>
+                <Tab>Game</Tab>
+                <Tab>Scores</Tab>
+                <Tab>Sales</Tab>
+              </TabList>
+              <form onSubmit={handleSubmit(() => {})}>
+                <TabPanels>
+                  <TabPanel>
+                    <GameForm register={register} />
+                  </TabPanel>
 
-          <TabPanel>
-            <ScoreForm
-              criticScoresRange={criticScoresRange}
-              updateCriticScoresRange={updateCriticScoresRange}
-              userScoresRange={userScoresRange}
-              updateUserScoresRange={updateUserScoresRange}
-            />
-          </TabPanel>
+                  <TabPanel>
+                    <ScoreForm
+                      criticScoresRange={criticScoresRange}
+                      updateCriticScoresRange={updateCriticScoresRange}
+                      userScoresRange={userScoresRange}
+                      updateUserScoresRange={updateUserScoresRange}
+                    />
+                  </TabPanel>
 
-          <TabPanel>
-            <SalesForm
-              globalSales={globalSales}
-              updateGlobalSales={updateGlobalSales}
-              NASales={NASales}
-              updateNASales={updateNASales}
-              JPNSales={JPNSales}
-              updateJPNSales={updateJPNSales}
-              EUSales={EUSales}
-              updateEUSales={updateEUSales}
-              otherRegionSales={otherRegionSales}
-              updateOtherRegionSales={updateOtherRegionSales}
-            />
-          </TabPanel>
-        </TabPanels>
-        <button>submit</button>
-      </form>
-    </Tabs>
+                  <TabPanel>
+                    <SalesForm
+                      globalSales={globalSales}
+                      updateGlobalSales={updateGlobalSales}
+                      NASales={NASales}
+                      updateNASales={updateNASales}
+                      JPNSales={JPNSales}
+                      updateJPNSales={updateJPNSales}
+                      EUSales={EUSales}
+                      updateEUSales={updateEUSales}
+                      otherRegionSales={otherRegionSales}
+                      updateOtherRegionSales={updateOtherRegionSales}
+                    />
+                  </TabPanel>
+                </TabPanels>
+                <button>submit</button>
+              </form>
+            </Tabs>
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant="outline" mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme="blue">Save</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };
