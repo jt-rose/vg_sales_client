@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { GameForm } from "./GameForm";
 import { ScoreForm } from "./ScoreForm";
 import { SalesForm } from "./SalesForm";
+import { ConsolesForm } from "./ConsolesForm";
 import { useState } from "react";
 import { FormData } from "./FormData";
 
@@ -71,6 +72,7 @@ export const QueryForm = () => {
             <Tabs>
               <TabList>
                 <Tab>Game</Tab>
+                <Tab>Consoles</Tab>
                 <Tab>Scores</Tab>
                 <Tab>Sales</Tab>
               </TabList>
@@ -78,6 +80,10 @@ export const QueryForm = () => {
                 <TabPanels>
                   <TabPanel>
                     <GameForm register={register} />
+                  </TabPanel>
+
+                  <TabPanel>
+                    <ConsolesForm />
                   </TabPanel>
 
                   <TabPanel>
