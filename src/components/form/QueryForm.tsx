@@ -22,6 +22,7 @@ import { SalesForm } from "./SalesForm";
 import { ConsolesForm } from "./ConsolesForm";
 import { useState } from "react";
 import { FormData } from "./FormData";
+import { GenreForm } from "./GenreForm";
 
 // a top level form component that houses
 // subforms to adjust the search fields
@@ -73,6 +74,7 @@ export const QueryForm = () => {
               <TabList>
                 <Tab>Game</Tab>
                 <Tab>Consoles</Tab>
+                <Tab>Genres</Tab>
                 <Tab>Scores</Tab>
                 <Tab>Sales</Tab>
               </TabList>
@@ -84,6 +86,10 @@ export const QueryForm = () => {
 
                   <TabPanel>
                     <ConsolesForm />
+                  </TabPanel>
+
+                  <TabPanel>
+                    <GenreForm />
                   </TabPanel>
 
                   <TabPanel>
