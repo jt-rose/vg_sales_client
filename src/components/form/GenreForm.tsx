@@ -1,4 +1,4 @@
-import { Grid, GridItem, Icon } from "@chakra-ui/react";
+import { Grid, Icon, Button } from "@chakra-ui/react";
 import { Genre } from "../../generated/graphql";
 import {
   GiHighKick,
@@ -70,10 +70,13 @@ export const GenreForm = () => {
   return (
     <Grid templateColumns="repeat(3, 1fr)">
       {genresWithIcons.map((item) => (
-        <GridItem key={`${item.genre}-button`}>
-          <Icon as={item.icon} />
+        <Button
+          leftIcon={<Icon as={item.icon} />}
+          variant="outline"
+          colorScheme="blue"
+        >
           {item.genre}
-        </GridItem>
+        </Button>
       ))}
     </Grid>
   );
