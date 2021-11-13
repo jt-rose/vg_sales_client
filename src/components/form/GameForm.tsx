@@ -9,8 +9,6 @@ import {
 } from "@chakra-ui/react";
 import {
   TextSearchType,
-  Console,
-  Genre,
   //Rating,
 } from "../../generated/graphql";
 import { FormRegister } from "./FormData";
@@ -53,26 +51,6 @@ export const GameForm = (props: { register: FormRegister }) => {
           </Radio>
         </Stack>
       </RadioGroup>
-
-      <label htmlFor="consoles">Consoles:</label>
-      <select {...register("consoles")} id="consoles">
-        <option value={undefined}>Select...</option>
-        {Object.keys(Console).map((console) => (
-          <option value={console} key={console}>
-            {console}
-          </option>
-        ))}
-      </select>
-
-      <label htmlFor="genres">Genres:</label>
-      <select {...register("genres")} id="genres">
-        <option value={undefined}>Select...</option>
-        {Object.keys(Genre).map((genre) => (
-          <option value={genre} key={genre}>
-            {genre}
-          </option>
-        ))}
-      </select>
 
       <FormLabel htmlFor="years">Years</FormLabel>
       <Flex>
