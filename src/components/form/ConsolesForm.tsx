@@ -88,8 +88,8 @@ const ConsoleLogoImg = (props: { src: any }) => {
 const createLogoImgList = (logoList: any[]) => () => {
   return (
     <>
-      {logoList.map((console) => (
-        <ConsoleLogoImg src={console} />
+      {logoList.map((console, i) => (
+        <ConsoleLogoImg src={console} key={`console-${i}-logo`} />
       ))}
     </>
   );
