@@ -18,7 +18,6 @@ export const SearchRangeSlider = (props: {
       <FormLabel htmlFor={props.label}>{props.label}</FormLabel>
       <RangeSlider
         aria-label={["min", "max"]}
-        defaultValue={[15, 30]}
         orientation={props.vertical ? "vertical" : "horizontal"}
         minH={props.vertical ? 32 : undefined}
         onChangeEnd={(values) => {

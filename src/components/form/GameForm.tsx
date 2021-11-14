@@ -7,14 +7,23 @@ import {
   Flex,
   Select,
 } from "@chakra-ui/react";
-import {
-  TextSearchType,
-  //Rating,
-} from "../../generated/graphql";
-import { FormRegister } from "./FormData";
+import { Dispatch, SetStateAction } from "react";
+import { TextSearchType, Rating } from "../../generated/graphql";
 
-export const GameForm = (props: { register: FormRegister }) => {
-  const { register } = props;
+export const GameForm = (props: {
+  title: string;
+  updateTitle: Dispatch<SetStateAction<string>>;
+  textSearchType: TextSearchType;
+  updateTextSearchType: Dispatch<SetStateAction<TextSearchType>>;
+  yearRange: [number, number];
+  updateYearRange: Dispatch<SetStateAction<[number, number]>>;
+  ratings: Rating[];
+  updateRatings: Dispatch<SetStateAction<Rating[]>>;
+  publisher: string;
+  updatePublisher: Dispatch<SetStateAction<string>>;
+  developer: string;
+  updateDeveloper: Dispatch<SetStateAction<string>>;
+}) => {
   return (
     <div>
       {/*    Title Input     */}
@@ -22,30 +31,37 @@ export const GameForm = (props: { register: FormRegister }) => {
       <Input
         key="title-input"
         placeHolder="Enter a title to search for..."
-        {...register("title")}
+        value={props.title}
+        onChange={(e) => props.updateTitle(e.target.value)}
       />
 
       {/*    Text Search Type Input     */}
       <RadioGroup>
         <Stack direction="row">
-          <Radio {...register("textSearchType")} value={TextSearchType.Equals}>
+          <Radio
+            value={TextSearchType.Equals}
+            onClick={() => props.updateTextSearchType(TextSearchType.Equals)}
+            // isChecked control - needed?
+          >
             equals
           </Radio>
           <Radio
-            {...register("textSearchType")}
             value={TextSearchType.Contains}
+            onClick={() => props.updateTextSearchType(TextSearchType.Contains)}
           >
             contains
           </Radio>
           <Radio
-            {...register("textSearchType")}
             value={TextSearchType.Startswith}
+            onClick={() =>
+              props.updateTextSearchType(TextSearchType.Startswith)
+            }
           >
             starts with
           </Radio>
           <Radio
-            {...register("textSearchType")}
             value={TextSearchType.Endswith}
+            onClick={() => props.updateTextSearchType(TextSearchType.Endswith)}
           >
             ends with
           </Radio>
@@ -55,9 +71,14 @@ export const GameForm = (props: { register: FormRegister }) => {
       <FormLabel htmlFor="years">Years</FormLabel>
       <Flex>
         <Select
-          {...register("startingYear")}
-          defaultValue={1970}
+          value={props.yearRange[0]}
           variant="flushed"
+          onChange={(e) =>
+            props.updateYearRange([
+              parseInt(e.target.value),
+              props.yearRange[1],
+            ])
+          }
         >
           <option value={1970}>1970</option>
           <option value={1971}>1971</option>
@@ -65,32 +86,39 @@ export const GameForm = (props: { register: FormRegister }) => {
         </Select>
         {" - "}
         <Select
-          {...register("endingYear")}
-          defaultValue={1980}
+          value={props.yearRange[1]}
           variant="flushed"
+          onChange={(e) =>
+            props.updateYearRange([
+              props.yearRange[0],
+              parseInt(e.target.value),
+            ])
+          }
         >
           <option value={1980}>1980</option>
           <option value={1981}>1981</option>
-          <option value={1982}>1982</option>
+          <option value={1982}>2016</option>
         </Select>
       </Flex>
 
       <p>rating</p>
 
       {/* add search suggestion */}
-      <FormLabel htmlFor="publishers">Publishers</FormLabel>
+      <FormLabel htmlFor="publisher">Publisher</FormLabel>
       <Input
-        key="publishers-input"
+        key="publisher-input"
         placeHolder="Enter a publisher to search for..."
-        {...register("publishers")}
+        value={props.publisher}
+        onChange={(e) => props.updatePublisher(e.target.value)}
       />
 
       {/* add search suggestion */}
-      <FormLabel htmlFor="developers">Developers</FormLabel>
+      <FormLabel htmlFor="developer">Developer</FormLabel>
       <Input
-        key="developers-input"
+        key="developer-input"
         placeHolder="Enter a developer to search for..."
-        {...register("developers")}
+        value={props.developer}
+        onChange={(e) => props.updateDeveloper(e.target.value)}
       />
     </div>
   );
