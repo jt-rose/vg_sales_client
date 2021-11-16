@@ -15,15 +15,20 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-//import { useForm, Controller } from "react-hook-form";
 import { GameForm } from "./GameForm";
 import { ScoreForm } from "./ScoreForm";
 import { SalesForm } from "./SalesForm";
 import { ConsolesForm } from "./ConsolesForm";
 import { useState } from "react";
-//import { FormData } from "./FormData";
 import { GenreForm } from "./GenreForm";
-import { Console, Genre, Rating, TextSearchType } from "src/generated/graphql";
+import {
+  Console,
+  Genre,
+  PaginatedQueryOptions,
+  Rating,
+  TextSearchType,
+  useGenreSalesQuery,
+} from "src/generated/graphql";
 
 // a top level form component that houses
 // subforms to adjust the search fields
@@ -52,8 +57,8 @@ export const QueryForm = () => {
 
   // set up state for consoles
   const [consoles, updateConsoles] = useState<Console[]>([
-    Console["3Do"],
-    Console["3Ds"],
+    Console._3Do,
+    Console._3Ds,
     Console.Dc,
     Console.Ds,
     Console.Gb,
@@ -116,22 +121,39 @@ export const QueryForm = () => {
     0, 100,
   ]);
 
-  console.log({
-    title,
-    yearRange,
-    ratings,
-    publisher,
-    developer,
-    consoles,
-    genres,
-    criticScoresRange,
-    userScoresRange,
-    globalSales,
-    NASales,
-    JPNSales,
-    EUSales,
-    otherRegionSales,
+  // the options for the query will be stored here and updated
+  // when clicking the submit button
+  // which will automatically trigger the 'useSalesQuery' hook to retrieve the new data
+  // this intermediate state is needed so a new call to the database is not made
+  // every single time one of the form items is updated
+  // and is instead held off until the actual submit button is clicked
+  const [queryOptions, updateQueryOptions] = useState<PaginatedQueryOptions>({
+    limit: 10,
+    offset: 0,
+    where: {},
+    groupBy: [],
+    orderBy: [],
   });
+  const onSubmit = () => {
+    updateQueryOptions({
+      limit: 10, // change later
+      offset: 0, // change later
+      // add groupby and order by later
+      where: {
+        console: consoles,
+      },
+    });
+  };
+
+  const { data, error, loading } = useGenreSalesQuery({
+    variables: {
+      options: queryOptions,
+    },
+  });
+  console.log(data);
+  if (loading) {
+    console.log("fetching");
+  }
 
   return (
     <>
@@ -148,15 +170,15 @@ export const QueryForm = () => {
           <DrawerBody>
             <Tabs>
               <TabList>
-                <Tab>Game</Tab>
-                <Tab>Consoles</Tab>
-                <Tab>Genres</Tab>
-                <Tab>Scores</Tab>
-                <Tab>Sales</Tab>
+                <Tab key="game-tab">Game</Tab>
+                <Tab key="consoles-tab">Consoles</Tab>
+                <Tab key="genres-tab">Genres</Tab>
+                <Tab key="scores-tab">Scores</Tab>
+                <Tab key="sales-tab">Sales</Tab>
               </TabList>
-              <form onSubmit={() => {}}>
+              <form onSubmit={onSubmit}>
                 <TabPanels>
-                  <TabPanel>
+                  <TabPanel key="game-panel">
                     <GameForm
                       title={title}
                       updateTitle={updateTitle}
@@ -173,21 +195,21 @@ export const QueryForm = () => {
                     />
                   </TabPanel>
 
-                  <TabPanel>
+                  <TabPanel key="console-panel">
                     <ConsolesForm
                       selectedConsoles={consoles}
                       updateConsoles={updateConsoles}
                     />
                   </TabPanel>
 
-                  <TabPanel>
+                  <TabPanel key="genre-panel">
                     <GenreForm
                       selectedGenres={genres}
                       updateGenres={updateGenres}
                     />
                   </TabPanel>
 
-                  <TabPanel>
+                  <TabPanel key="score-panel">
                     <ScoreForm
                       criticScoresRange={criticScoresRange}
                       updateCriticScoresRange={updateCriticScoresRange}
@@ -196,7 +218,7 @@ export const QueryForm = () => {
                     />
                   </TabPanel>
 
-                  <TabPanel>
+                  <TabPanel key="sales-panel">
                     <SalesForm
                       globalSales={globalSales}
                       updateGlobalSales={updateGlobalSales}
