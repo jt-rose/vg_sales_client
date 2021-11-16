@@ -19,21 +19,19 @@ const Sales = () => {
     limit: 10,
     offset: 0,
   });
-  const [res] = useGenreSalesQuery({
+  const { data, error, loading } = useGenreSalesQuery({
     variables: {
       options,
     },
   });
 
-  //const query = formatQueryType('genre')
-  const { data, fetching, error } = res;
   console.log(data);
   return (
     <div>
       <h1>Sales</h1>
 
       {error && <p>Oh no! {error.message}</p>}
-      {fetching && <p>...fetching</p>}
+      {loading && <p>...loading</p>}
       {data && (
         /*<VictoryChart
           singleQuadrantDomainPadding

@@ -1,20 +1,20 @@
-import { Provider } from 'urql'
-import { client } from '../utils/urqlClient'
-import { useRouter } from 'next/router'
-import { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ApolloProvider } from "@apollo/client";
+import { client } from "../utils/apolloClient";
+import { useRouter } from "next/router";
+import { AppProps } from "next/app";
+import { ChakraProvider } from "@chakra-ui/react";
 
-import '../styles/globals.css'
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter()
+  const router = useRouter();
   return (
-    <Provider value={client}>
-      <ChakraProvider resetCSS >
+    <ApolloProvider client={client}>
+      <ChakraProvider resetCSS>
         <Component {...pageProps} key={router.route} />
       </ChakraProvider>
-    </Provider>
-  )
+    </ApolloProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
