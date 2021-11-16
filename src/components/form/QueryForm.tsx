@@ -51,7 +51,39 @@ export const QueryForm = () => {
   const [developer, updateDeveloper] = useState<string>("");
 
   // set up state for consoles
-  const [consoles, updateConsoles] = useState<Console[]>([]);
+  const [consoles, updateConsoles] = useState<Console[]>([
+    Console["3Do"],
+    Console["3Ds"],
+    Console.Dc,
+    Console.Ds,
+    Console.Gb,
+    Console.Gba,
+    Console.Gc,
+    Console.Gen,
+    Console.Gg,
+    Console.N64,
+    Console.Nes,
+    Console.Ng,
+    Console.Pc,
+    Console.Pcfx,
+    Console.Ps,
+    Console.Ps2,
+    Console.Ps3,
+    Console.Ps4,
+    Console.Psp,
+    Console.Psv,
+    Console.Sat,
+    Console.Scd,
+    Console.Snes,
+    Console.Tg16,
+    Console.Wii,
+    Console.Wiiu,
+    Console.Ws,
+    Console.X360,
+    Console.Xb,
+    Console.Xone,
+    Console._2600,
+  ]);
 
   // set up state for genres
   const [genres, updateGenres] = useState<Genre[]>([
