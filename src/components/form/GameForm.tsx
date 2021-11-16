@@ -45,6 +45,7 @@ export const GameForm = (props: {
           <Radio
             value={TextSearchType.Equals}
             onClick={() => props.updateTextSearchType(TextSearchType.Equals)}
+            key={TextSearchType.Equals + "-radio-option"}
             // isChecked control - needed?
           >
             equals
@@ -52,6 +53,7 @@ export const GameForm = (props: {
           <Radio
             value={TextSearchType.Contains}
             onClick={() => props.updateTextSearchType(TextSearchType.Contains)}
+            key={TextSearchType.Contains + "-radio-option"}
           >
             contains
           </Radio>
@@ -60,12 +62,14 @@ export const GameForm = (props: {
             onClick={() =>
               props.updateTextSearchType(TextSearchType.Startswith)
             }
+            key={TextSearchType.Startswith + "-radio-option"}
           >
             starts with
           </Radio>
           <Radio
             value={TextSearchType.Endswith}
             onClick={() => props.updateTextSearchType(TextSearchType.Endswith)}
+            key={TextSearchType.Endswith + "-radio-option"}
           >
             ends with
           </Radio>
