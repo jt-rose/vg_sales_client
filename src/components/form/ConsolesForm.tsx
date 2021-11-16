@@ -81,7 +81,7 @@ const nintendoHandhelds: ConsoleAndLogo[] = [
   { logo: GBLogo, name: Console.Gb },
   { logo: GBALogo, name: Console.Gba },
   { logo: DSLogo, name: Console.Ds },
-  { logo: _3DSLogo, name: Console["3Ds"] },
+  { logo: _3DSLogo, name: Console._3Ds },
 ];
 
 const segaConsoles: ConsoleAndLogo[] = [
@@ -102,7 +102,7 @@ const sonyConsoles: ConsoleAndLogo[] = [
 ];
 
 const otherConsoles: ConsoleAndLogo[] = [
-  { logo: _3DOLogo, name: Console["3Do"] },
+  { logo: _3DOLogo, name: Console._3Do },
   { logo: WonderswanLogo, name: Console.Ws },
   { logo: _2600Logo, name: Console._2600 },
   { logo: PCFXLogo, name: Console.Pcfx },

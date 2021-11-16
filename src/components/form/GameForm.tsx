@@ -120,7 +120,7 @@ export const GameForm = (props: {
           Rating.KA,
           Rating.Rp,
         ].map((rating) => (
-          <WrapItem>
+          <WrapItem key={rating + "-wrap"}>
             <Text
               fontSize="2xl"
               onClick={() =>
