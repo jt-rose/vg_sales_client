@@ -69,11 +69,11 @@ const genresWithIcons: { genre: Genre; icon: any }[] = [
 ];
 
 export const GenreForm = (props: {
-  genres: Genre[];
+  selectedGenres: Genre[];
   updateGenres: Dispatch<SetStateAction<Genre[]>>;
 }) => {
   const updateGenres = (genre: Genre) => {
-    const updatedGenres = toggleFromArray(genre, props.genres);
+    const updatedGenres = toggleFromArray(genre, props.selectedGenres);
     props.updateGenres(updatedGenres);
   };
   return (
@@ -82,7 +82,9 @@ export const GenreForm = (props: {
         <Button
           leftIcon={<Icon as={item.icon} />}
           variant="outline"
-          colorScheme={props.genres.includes(item.genre) ? "blue" : "gray"}
+          colorScheme={
+            props.selectedGenres.includes(item.genre) ? "blue" : "gray"
+          }
           key={`${item.genre}-button`}
           onClick={() => updateGenres(item.genre)}
         >
