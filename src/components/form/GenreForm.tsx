@@ -15,6 +15,7 @@ import {
   GiSportMedal,
 } from "react-icons/gi";
 import { Dispatch, SetStateAction } from "react";
+import { toggleFromArray } from "../../utils/toggleFromArray";
 
 const genresWithIcons: { genre: Genre; icon: any }[] = [
   {
@@ -72,13 +73,8 @@ export const GenreForm = (props: {
   updateGenres: Dispatch<SetStateAction<Genre[]>>;
 }) => {
   const updateGenres = (genre: Genre) => {
-    const hasGenre = props.genres.includes(genre);
-    if (hasGenre) {
-      const updatedGenreList = props.genres.filter((g) => g !== genre);
-      props.updateGenres(updatedGenreList);
-    } else {
-      props.updateGenres([...props.genres, genre]);
-    }
+    const updatedGenres = toggleFromArray(genre, props.genres);
+    props.updateGenres(updatedGenres);
   };
   return (
     <Grid templateColumns="repeat(3, 1fr)">
