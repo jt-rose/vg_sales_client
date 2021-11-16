@@ -24,7 +24,8 @@ import { useState } from "react";
 //import { FormData } from "./FormData";
 import { GenreForm } from "./GenreForm";
 import {
-  /*Console, Genre,*/ Rating,
+  /*Console, */ Genre,
+  Rating,
   TextSearchType,
 } from "src/generated/graphql";
 
@@ -59,7 +60,20 @@ export const QueryForm = () => {
   //const [consoles, updateConsoles] = useState<Console[]>([]);
 
   // set up state for genres
-  //const [genres, updateGenres] = useState<Genre[]>([]);
+  const [genres, updateGenres] = useState<Genre[]>([
+    Genre.Action,
+    Genre.Adventure,
+    Genre.Fighting,
+    Genre.Misc,
+    Genre.Platform,
+    Genre.Puzzle,
+    Genre.Racing,
+    Genre.Roleplaying,
+    Genre.Shooter,
+    Genre.Simulation,
+    Genre.Sports,
+    Genre.Strategy,
+  ]);
 
   // set up state for critic and user scores
   const [criticScoresRange, updateCriticScoresRange] = useState<number[]>([
@@ -121,7 +135,7 @@ export const QueryForm = () => {
                   </TabPanel>
 
                   <TabPanel>
-                    <GenreForm />
+                    <GenreForm genres={genres} updateGenres={updateGenres} />
                   </TabPanel>
 
                   <TabPanel>

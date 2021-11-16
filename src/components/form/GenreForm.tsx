@@ -14,6 +14,7 @@ import {
   GiMineExplosion,
   GiSportMedal,
 } from "react-icons/gi";
+import { Dispatch, SetStateAction } from "react";
 
 const genresWithIcons: { genre: Genre; icon: any }[] = [
   {
@@ -66,14 +67,28 @@ const genresWithIcons: { genre: Genre; icon: any }[] = [
   },
 ];
 
-export const GenreForm = () => {
+export const GenreForm = (props: {
+  genres: Genre[];
+  updateGenres: Dispatch<SetStateAction<Genre[]>>;
+}) => {
+  const updateGenres = (genre: Genre) => {
+    const hasGenre = props.genres.includes(genre);
+    if (hasGenre) {
+      const updatedGenreList = props.genres.filter((g) => g !== genre);
+      props.updateGenres(updatedGenreList);
+    } else {
+      props.updateGenres([...props.genres, genre]);
+    }
+  };
   return (
     <Grid templateColumns="repeat(3, 1fr)">
       {genresWithIcons.map((item) => (
         <Button
           leftIcon={<Icon as={item.icon} />}
           variant="outline"
-          colorScheme="blue"
+          colorScheme={props.genres.includes(item.genre) ? "blue" : "gray"}
+          key={`${item.genre}-button`}
+          onClick={() => updateGenres(item.genre)}
         >
           {item.genre}
         </Button>
