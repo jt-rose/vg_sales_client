@@ -6,8 +6,12 @@ import {
   Radio,
   Flex,
   Select,
+  Wrap,
+  WrapItem,
+  Text,
 } from "@chakra-ui/react";
 import { Dispatch, SetStateAction } from "react";
+import { toggleFromArray } from "src/utils/toggleFromArray";
 import { TextSearchType, Rating } from "../../generated/graphql";
 
 export const GameForm = (props: {
@@ -17,7 +21,7 @@ export const GameForm = (props: {
   updateTextSearchType: Dispatch<SetStateAction<TextSearchType>>;
   yearRange: [number, number];
   updateYearRange: Dispatch<SetStateAction<[number, number]>>;
-  ratings: Rating[];
+  selectedRatings: Rating[];
   updateRatings: Dispatch<SetStateAction<Rating[]>>;
   publisher: string;
   updatePublisher: Dispatch<SetStateAction<string>>;
@@ -101,7 +105,31 @@ export const GameForm = (props: {
         </Select>
       </Flex>
 
-      <p>rating</p>
+      <Wrap>
+        {[
+          Rating.E,
+          Rating.E10Plus,
+          Rating.Ec,
+          Rating.T,
+          Rating.M,
+          Rating.Ao,
+          Rating.KA,
+          Rating.Rp,
+        ].map((rating) => (
+          <WrapItem>
+            <Text
+              fontSize="2xl"
+              onClick={() =>
+                props.updateRatings(
+                  toggleFromArray(rating, props.selectedRatings)
+                )
+              }
+            >
+              {rating.toUpperCase()}
+            </Text>
+          </WrapItem>
+        ))}
+      </Wrap>
 
       {/* add search suggestion */}
       <FormLabel htmlFor="publisher">Publisher</FormLabel>

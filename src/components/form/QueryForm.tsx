@@ -23,19 +23,13 @@ import { ConsolesForm } from "./ConsolesForm";
 import { useState } from "react";
 //import { FormData } from "./FormData";
 import { GenreForm } from "./GenreForm";
-import {
-  /*Console, */ Genre,
-  Rating,
-  TextSearchType,
-} from "src/generated/graphql";
+import { Console, Genre, Rating, TextSearchType } from "src/generated/graphql";
 
 // a top level form component that houses
 // subforms to adjust the search fields
 // according to game, scores, and sales data
 export const QueryForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  //const { register, control, handleSubmit } = useForm<FormData>();
 
   // set up state for game parameters
   const [title, updateTitle] = useState<string>("");
@@ -57,7 +51,7 @@ export const QueryForm = () => {
   const [developer, updateDeveloper] = useState<string>("");
 
   // set up state for consoles
-  //const [consoles, updateConsoles] = useState<Console[]>([]);
+  const [consoles, updateConsoles] = useState<Console[]>([]);
 
   // set up state for genres
   const [genres, updateGenres] = useState<Genre[]>([
@@ -90,6 +84,23 @@ export const QueryForm = () => {
     0, 100,
   ]);
 
+  console.log({
+    title,
+    yearRange,
+    ratings,
+    publisher,
+    developer,
+    consoles,
+    genres,
+    criticScoresRange,
+    userScoresRange,
+    globalSales,
+    NASales,
+    JPNSales,
+    EUSales,
+    otherRegionSales,
+  });
+
   return (
     <>
       <Button colorScheme="teal" onClick={onOpen}>
@@ -119,7 +130,7 @@ export const QueryForm = () => {
                       updateTitle={updateTitle}
                       textSearchType={textSearchType}
                       updateTextSearchType={updateTextSearchType}
-                      ratings={ratings}
+                      selectedRatings={ratings}
                       updateRatings={updateRatings}
                       yearRange={yearRange}
                       updateYearRange={updateYearRange}
@@ -131,11 +142,17 @@ export const QueryForm = () => {
                   </TabPanel>
 
                   <TabPanel>
-                    <ConsolesForm />
+                    <ConsolesForm
+                      selectedConsoles={consoles}
+                      updateConsoles={updateConsoles}
+                    />
                   </TabPanel>
 
                   <TabPanel>
-                    <GenreForm genres={genres} updateGenres={updateGenres} />
+                    <GenreForm
+                      selectedGenres={genres}
+                      updateGenres={updateGenres}
+                    />
                   </TabPanel>
 
                   <TabPanel>
