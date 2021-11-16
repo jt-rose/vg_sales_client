@@ -34,7 +34,7 @@ export const GameForm = (props: {
       <FormLabel htmlFor="title">Title</FormLabel>
       <Input
         key="title-input"
-        placeHolder="Enter a title to search for..."
+        placeholder="Enter a title to search for..."
         value={props.title}
         onChange={(e) => props.updateTitle(e.target.value)}
       />
@@ -135,7 +135,7 @@ export const GameForm = (props: {
       <FormLabel htmlFor="publisher">Publisher</FormLabel>
       <Input
         key="publisher-input"
-        placeHolder="Enter a publisher to search for..."
+        placeholder="Enter a publisher to search for..."
         value={props.publisher}
         onChange={(e) => props.updatePublisher(e.target.value)}
       />
@@ -144,7 +144,7 @@ export const GameForm = (props: {
       <FormLabel htmlFor="developer">Developer</FormLabel>
       <Input
         key="developer-input"
-        placeHolder="Enter a developer to search for..."
+        placeholder="Enter a developer to search for..."
         value={props.developer}
         onChange={(e) => props.updateDeveloper(e.target.value)}
       />
