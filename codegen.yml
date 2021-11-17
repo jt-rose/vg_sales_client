@@ -1,11 +1,10 @@
 overwrite: true
-schema: "http://localhost:8000/graphql"
-documents: "src/graphql/**/*.graphql"
-config:
-  withRefetchFn: true
 generates:
-  src/generated/graphql.tsx:
+  src/generated/graphql.ts:
+    schema: "http://localhost:8000/graphql"
+    documents: "src/graphql/**/*.graphql"
     plugins:
       - "typescript"
       - "typescript-operations"
-      - "typescript-react-apollo"
+      - "typescript-graphql-request"
+      - "plugin-typescript-swr"

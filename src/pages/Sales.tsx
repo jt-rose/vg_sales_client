@@ -1,8 +1,4 @@
-import {
-  useGenreSalesQuery,
-  //Column,
-  PaginatedQueryOptions,
-} from "../generated/graphql";
+import { PaginatedQueryOptions } from "../generated/graphql";
 import {
   BarChart,
   BarChartProps,
@@ -11,6 +7,17 @@ import {
 // quick test of graphql connection
 import { useState } from "react";
 import { QueryForm } from "../components/form/QueryForm";
+//import { GetStaticProps } from "next";
+import { sdk } from "../client";
+
+/*
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+
+    }
+  }
+}*/
 
 // hoc (query, resultName, field)
 const Sales = () => {
@@ -19,10 +26,8 @@ const Sales = () => {
     limit: 10,
     offset: 0,
   });
-  const { data, error, loading } = useGenreSalesQuery({
-    variables: {
-      options,
-    },
+  const { data, error } = sdk.useGenreSales("key-12345", {
+    options,
   });
 
   console.log(data);
@@ -30,8 +35,10 @@ const Sales = () => {
     <div>
       <h1>Sales</h1>
 
-      {error && <p>Oh no! {error.message}</p>}
-      {loading && <p>...loading</p>}
+      {error && (
+        <p>Oh no! {error instanceof Error ? error.message : "unknown"}</p>
+      )}
+      {!data && <p>...loading</p>}
       {data && (
         /*<VictoryChart
           singleQuadrantDomainPadding
