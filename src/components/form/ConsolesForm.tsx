@@ -1,8 +1,6 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import Image from "next/image";
 import { Console } from "../../generated/graphql";
-import { Dispatch, SetStateAction } from "react";
-import { toggleFromArray } from "../../utils/toggleFromArray";
 
 // Microsoft console log0s
 import XboxLogo from "src/img/microsoft/Xbox_2001_(White).svg";
@@ -47,6 +45,8 @@ import PCFXLogo from "src/img/other/NEC_PC-FX_logo.png";
 import NeoGeoLogo from "src/img/other/Neo-Geo_mvs_logo.png";
 import PCSteamLogo from "src/img/other/Steam_2016_logo_black.svg.png";
 import TurboGrafx16Logo from "src/img/other/TurboGrafx16logo.jpg";
+import { useAppDispatch, useAppSelector } from "src/redux/hooks";
+import { updateConsoles } from "src/redux/searchParamsReducer";
 
 interface ConsoleAndLogo {
   logo: any;
@@ -111,46 +111,29 @@ const otherConsoles: ConsoleAndLogo[] = [
   { logo: TurboGrafx16Logo, name: Console.Tg16 },
 ];
 
-type UpdateConsolesDispatch = Dispatch<SetStateAction<Console[]>>;
-
-const ConsoleLogoImg = (props: {
-  src: ConsoleAndLogo;
-  selectedConsoles: Console[];
-  updateConsoles: UpdateConsolesDispatch;
-}) => {
-  const updateConsoles = (console: Console) => {
-    const updatedConsoles = toggleFromArray(console, props.selectedConsoles);
-    props.updateConsoles(updatedConsoles);
-  };
+const ConsoleLogoImg = (props: { src: ConsoleAndLogo }) => {
+  // will add shading for deselected consoles later
+  const consoles = useAppSelector((state) => state.searchParams.consoles);
+  const dispatch = useAppDispatch();
   return (
     <GridItem key={`${props.src}-logo-img`}>
       <Image
         src={props.src.logo}
-        onClick={() => updateConsoles(props.src.name)}
+        onClick={() => dispatch(updateConsoles(props.src.name))}
       />
     </GridItem>
   );
 };
 
-const createLogoImgList =
-  (logoList: ConsoleAndLogo[]) =>
-  (props: {
-    selectedConsoles: Console[];
-    updateConsoles: UpdateConsolesDispatch;
-  }) => {
-    return (
-      <>
-        {logoList.map((console, i) => (
-          <ConsoleLogoImg
-            src={console}
-            selectedConsoles={props.selectedConsoles}
-            key={`console-${i}-logo`}
-            updateConsoles={props.updateConsoles}
-          />
-        ))}
-      </>
-    );
-  };
+const createLogoImgList = (logoList: ConsoleAndLogo[]) => () => {
+  return (
+    <>
+      {logoList.map((console, i) => (
+        <ConsoleLogoImg src={console} key={`console-${i}-logo`} />
+      ))}
+    </>
+  );
+};
 
 const MicrosoftLogos = createLogoImgList(microsoftConsoles);
 const NintendoConsoleLogos = createLogoImgList(nintendoConsoles);
@@ -159,36 +142,15 @@ const SegaLogos = createLogoImgList(segaConsoles);
 const SonyLogos = createLogoImgList(sonyConsoles);
 const OtherLogos = createLogoImgList(otherConsoles);
 
-export const ConsolesForm = (props: {
-  selectedConsoles: Console[];
-  updateConsoles: UpdateConsolesDispatch;
-}) => {
+export const ConsolesForm = () => {
   return (
     <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-      <NintendoConsoleLogos
-        selectedConsoles={props.selectedConsoles}
-        updateConsoles={props.updateConsoles}
-      />
-      <NintendoHandheldLogos
-        selectedConsoles={props.selectedConsoles}
-        updateConsoles={props.updateConsoles}
-      />
-      <SegaLogos
-        selectedConsoles={props.selectedConsoles}
-        updateConsoles={props.updateConsoles}
-      />
-      <SonyLogos
-        selectedConsoles={props.selectedConsoles}
-        updateConsoles={props.updateConsoles}
-      />
-      <MicrosoftLogos
-        selectedConsoles={props.selectedConsoles}
-        updateConsoles={props.updateConsoles}
-      />
-      <OtherLogos
-        selectedConsoles={props.selectedConsoles}
-        updateConsoles={props.updateConsoles}
-      />
+      <NintendoConsoleLogos />
+      <NintendoHandheldLogos />
+      <SegaLogos />
+      <SonyLogos />
+      <MicrosoftLogos />
+      <OtherLogos />
     </Grid>
   );
 };

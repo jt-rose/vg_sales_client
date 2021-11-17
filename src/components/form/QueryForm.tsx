@@ -22,7 +22,6 @@ import { ConsolesForm } from "./ConsolesForm";
 import { useState } from "react";
 import { GenreForm } from "./GenreForm";
 import {
-  Console,
   PaginatedQueryOptions,
   Rating,
   TextSearchType,
@@ -55,42 +54,8 @@ export const QueryForm = () => {
   const [publisher, updatePublisher] = useState<string>("");
   const [developer, updateDeveloper] = useState<string>("");
 
-  // set up state for consoles
-  const [consoles, updateConsoles] = useState<Console[]>([
-    Console._3Do,
-    Console._3Ds,
-    Console.Dc,
-    Console.Ds,
-    Console.Gb,
-    Console.Gba,
-    Console.Gc,
-    Console.Gen,
-    Console.Gg,
-    Console.N64,
-    Console.Nes,
-    Console.Ng,
-    Console.Pc,
-    Console.Pcfx,
-    Console.Ps,
-    Console.Ps2,
-    Console.Ps3,
-    Console.Ps4,
-    Console.Psp,
-    Console.Psv,
-    Console.Sat,
-    Console.Scd,
-    Console.Snes,
-    Console.Tg16,
-    Console.Wii,
-    Console.Wiiu,
-    Console.Ws,
-    Console.X360,
-    Console.Xb,
-    Console.Xone,
-    Console._2600,
-  ]);
-
   const genres = useAppSelector((state) => state.searchParams.genres);
+  const consoles = useAppSelector((state) => state.searchParams.consoles);
 
   // set up state for critic and user scores
   const [criticScoresRange, updateCriticScoresRange] = useState<number[]>([
@@ -183,10 +148,7 @@ export const QueryForm = () => {
                   </TabPanel>
 
                   <TabPanel key="console-panel">
-                    <ConsolesForm
-                      selectedConsoles={consoles}
-                      updateConsoles={updateConsoles}
-                    />
+                    <ConsolesForm />
                   </TabPanel>
 
                   <TabPanel key="genre-panel">
