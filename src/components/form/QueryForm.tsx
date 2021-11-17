@@ -25,9 +25,7 @@ import {
   PaginatedQueryOptions,
   Rating,
   TextSearchType,
-  useGenreSalesQuery,
 } from "src/generated/graphql";
-import { useAppSelector } from "../../redux/hooks";
 
 // a top level form component that houses
 // subforms to adjust the search fields
@@ -54,8 +52,8 @@ export const QueryForm = () => {
   const [publisher, updatePublisher] = useState<string>("");
   const [developer, updateDeveloper] = useState<string>("");
 
-  const genres = useAppSelector((state) => state.searchParams.genres);
-  const consoles = useAppSelector((state) => state.searchParams.consoles);
+  //const genres = useAppSelector((state) => state.searchParams.genres);
+  //const consoles = useAppSelector((state) => state.searchParams.consoles);
 
   // set up state for critic and user scores
   const [criticScoresRange, updateCriticScoresRange] = useState<number[]>([
@@ -85,27 +83,18 @@ export const QueryForm = () => {
     groupBy: [],
     orderBy: [],
   });
+  console.log(queryOptions);
   const onSubmit = () => {
     updateQueryOptions({
       limit: 10, // change later
       offset: 0, // change later
       // add groupby and order by later
       where: {
-        console: consoles,
-        genre: genres,
+        console: [],
+        genre: [],
       },
     });
   };
-
-  const { data, error, loading } = useGenreSalesQuery({
-    variables: {
-      options: queryOptions,
-    },
-  });
-  console.log(data);
-  if (loading) {
-    console.log("fetching");
-  }
 
   return (
     <>
