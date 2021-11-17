@@ -1,52 +1,52 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import Image from "next/image";
 import { Console } from "../../generated/graphql";
+import { useAppDispatch /*useAppSelector*/ } from "src/redux/hooks";
+import { updateConsoles } from "src/redux/searchParamsReducer";
 
-// Microsoft console log0s
-import XboxLogo from "src/img/microsoft/Xbox_2001_(White).svg";
-import Xbox360Logo from "src/img/microsoft/X_Box_360_logo.svg";
-import XboxOneLogo from "src/img/microsoft/X_Box_One_logo.svg";
+// Microsoft console logos
+import XboxLogo from "public/microsoft/Xbox_2001_(White).svg";
+import Xbox360Logo from "public/microsoft/X_Box_360_logo.svg";
+import XboxOneLogo from "public/microsoft/X_Box_One_logo.svg";
 
 // Nintendo console logos
-import NESLogo from "src/img/nintendo/NES_logo.svg";
-import SNESLogo from "src/img/nintendo/Super_Nintendo_Entertainment_System_logo.svg";
-import N64Logo from "src/img/nintendo/2560px-Nintendo_64_Logo.svg.png";
-import GCLogo from "src/img/nintendo/Gamecube_Logo_vert.svg";
-import WiiLogo from "src/img/nintendo/Wii.svg";
-import WiiULogo from "src/img/nintendo/WiiU.svg";
+import NESLogo from "public/nintendo/NES_logo.svg";
+import SNESLogo from "public/nintendo/Super_Nintendo_Entertainment_System_logo.svg";
+import N64Logo from "public/nintendo/2560px-Nintendo_64_Logo.svg.png";
+import GCLogo from "public/nintendo/Gamecube_Logo_vert.svg";
+import WiiLogo from "public/nintendo/Wii.svg";
+import WiiULogo from "public/nintendo/WiiU.svg";
 
 // Nintendo handheld logos
-import GBLogo from "src/img/nintendo/Nintendo_Game_Boy_Logo.svg";
-import GBALogo from "src/img/nintendo/Gameboy_advance_logo.svg";
-import DSLogo from "src/img/nintendo/Nintendo_DS_Logo.svg";
-import _3DSLogo from "src/img/nintendo/Nintendo_3ds_logo.svg";
+import GBLogo from "public/nintendo/Nintendo_Game_Boy_Logo.svg";
+import GBALogo from "public/nintendo/Gameboy_advance_logo.svg";
+import DSLogo from "public/nintendo/Nintendo_DS_Logo.svg";
+import _3DSLogo from "public/nintendo/Nintendo_3ds_logo.svg";
 
 // Sega console + handheld logos
 //import SegaMasterSyetemLogo from "";
-import GenLogo from "src/img/sega/Sega_genesis_logo.svg";
-import SegaCDLogo from "src/img/sega/Sega_CD_Logo_USA.png";
-import SegaSaturnLogo from "src/img/sega/SEGA_Saturn_logo.png";
-import DreamcastLogo from "src/img/sega/Dreamcast_logo_(orange).svg";
-import GameGearLogo from "src/img/sega/Game_gear_us-jp_logo.svg";
+import GenLogo from "public/sega/Sega_genesis_logo.svg";
+import SegaCDLogo from "public/sega/Sega_CD_Logo_USA.png";
+import SegaSaturnLogo from "public/sega/SEGA_Saturn_logo.png";
+import DreamcastLogo from "public/sega/Dreamcast_logo_(orange).svg";
+import GameGearLogo from "public/sega/Game_gear_us-jp_logo.svg";
 
 // Sony console + handheld logos
-import PS1Logo from "src/img/sony/Playstation_logo_colour_and_wordmark.png";
-import PS2Logo from "src/img/sony/PlayStation_2_logo.svg";
-import PS3Logo from "src/img/sony/PlayStation_3_logo_(2009).svg";
-import PS4Logo from "src/img/sony/PlayStation_4_logo_and_wordmark.svg";
-import PSPLogo from "src/img/sony/PSP_Logo.svg";
-import PSVitaLogo from "src/img/sony/PlayStation_Vita_logo.svg";
+import PS1Logo from "public/sony/Playstation_logo_colour_and_wordmark.png";
+import PS2Logo from "public/sony/PlayStation_2_logo.svg";
+import PS3Logo from "public/sony/PlayStation_3_logo_(2009).svg";
+import PS4Logo from "public/sony/PlayStation_4_logo_and_wordmark.svg";
+import PSPLogo from "public/sony/PSP_Logo.svg";
+import PSVitaLogo from "public/sony/PlayStation_Vita_logo.svg";
 
 // other console + handheld logos
-import _3DOLogo from "src/img/other/3DO_Logo.svg";
-import WonderswanLogo from "src/img/other/2560px-WonderSwan_logo.svg.png";
-import _2600Logo from "src/img/other/Atari2600logo.svg";
-import PCFXLogo from "src/img/other/NEC_PC-FX_logo.png";
-import NeoGeoLogo from "src/img/other/Neo-Geo_mvs_logo.png";
-import PCSteamLogo from "src/img/other/Steam_2016_logo_black.svg.png";
-import TurboGrafx16Logo from "src/img/other/TurboGrafx16logo.jpg";
-import { useAppDispatch, useAppSelector } from "src/redux/hooks";
-import { updateConsoles } from "src/redux/searchParamsReducer";
+import _3DOLogo from "public/other/3DO_Logo.svg";
+import WonderswanLogo from "public/other/2560px-WonderSwan_logo.svg.png";
+import _2600Logo from "public/other/Atari2600logo.svg";
+import PCFXLogo from "public/other/NEC_PC-FX_logo.png";
+import NeoGeoLogo from "public/other/Neo-Geo_mvs_logo.png";
+import PCSteamLogo from "public/other/Steam_2016_logo_black.svg.png";
+import TurboGrafx16Logo from "public/other/TurboGrafx16logo.jpg";
 
 interface ConsoleAndLogo {
   logo: any;
@@ -111,36 +111,40 @@ const otherConsoles: ConsoleAndLogo[] = [
   { logo: TurboGrafx16Logo, name: Console.Tg16 },
 ];
 
+// ! add proper alts later
 const ConsoleLogoImg = (props: { src: ConsoleAndLogo }) => {
   // will add shading for deselected consoles later
-  const consoles = useAppSelector((state) => state.searchParams.consoles);
+  //const consoles = useAppSelector((state) => state.searchParams.consoles);
   const dispatch = useAppDispatch();
   return (
     <GridItem key={`${props.src}-logo-img`}>
       <Image
         src={props.src.logo}
+        alt={props.src.name}
         onClick={() => dispatch(updateConsoles(props.src.name))}
       />
     </GridItem>
   );
 };
 
-const createLogoImgList = (logoList: ConsoleAndLogo[]) => () => {
+const LogoImgList = (props: { logoList: ConsoleAndLogo[] }) => {
   return (
     <>
-      {logoList.map((console, i) => (
+      {props.logoList.map((console, i) => (
         <ConsoleLogoImg src={console} key={`console-${i}-logo`} />
       ))}
     </>
   );
 };
 
-const MicrosoftLogos = createLogoImgList(microsoftConsoles);
-const NintendoConsoleLogos = createLogoImgList(nintendoConsoles);
-const NintendoHandheldLogos = createLogoImgList(nintendoHandhelds);
-const SegaLogos = createLogoImgList(segaConsoles);
-const SonyLogos = createLogoImgList(sonyConsoles);
-const OtherLogos = createLogoImgList(otherConsoles);
+const MicrosoftLogos = () => <LogoImgList logoList={microsoftConsoles} />;
+const NintendoConsoleLogos = () => <LogoImgList logoList={nintendoConsoles} />;
+const NintendoHandheldLogos = () => (
+  <LogoImgList logoList={nintendoHandhelds} />
+);
+const SegaLogos = () => <LogoImgList logoList={segaConsoles} />;
+const SonyLogos = () => <LogoImgList logoList={sonyConsoles} />;
+const OtherLogos = () => <LogoImgList logoList={otherConsoles} />;
 
 export const ConsolesForm = () => {
   return (
