@@ -1,5 +1,11 @@
-import { gql } from "@apollo/client";
-import * as Apollo from "@apollo/client";
+import { GraphQLClient } from "graphql-request";
+import * as Dom from "graphql-request/dist/types.dom";
+import gql from "graphql-tag";
+import { ClientError } from "graphql-request/dist/types";
+import useSWR, {
+  SWRConfiguration as SWRConfigInterface,
+  Key as SWRKeyInterface,
+} from "swr";
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
@@ -10,7 +16,6 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
-const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -793,62 +798,6 @@ export const ConsoleSalesDocument = gql`
     }
   }
 `;
-
-/**
- * __useConsoleSalesQuery__
- *
- * To run a query within a React component, call `useConsoleSalesQuery` and pass it any options that fit your needs.
- * When your component renders, `useConsoleSalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useConsoleSalesQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function useConsoleSalesQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    ConsoleSalesQuery,
-    ConsoleSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ConsoleSalesQuery, ConsoleSalesQueryVariables>(
-    ConsoleSalesDocument,
-    options
-  );
-}
-export function useConsoleSalesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    ConsoleSalesQuery,
-    ConsoleSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ConsoleSalesQuery, ConsoleSalesQueryVariables>(
-    ConsoleSalesDocument,
-    options
-  );
-}
-export type ConsoleSalesQueryHookResult = ReturnType<
-  typeof useConsoleSalesQuery
->;
-export type ConsoleSalesLazyQueryHookResult = ReturnType<
-  typeof useConsoleSalesLazyQuery
->;
-export type ConsoleSalesQueryResult = Apollo.QueryResult<
-  ConsoleSalesQuery,
-  ConsoleSalesQueryVariables
->;
-export function refetchConsoleSalesQuery(
-  variables: ConsoleSalesQueryVariables
-) {
-  return { query: ConsoleSalesDocument, variables: variables };
-}
 export const CriticScoresDocument = gql`
   query CriticScores($options: PaginatedQueryOptions!) {
     highestCriticScores(options: $options) {
@@ -880,62 +829,6 @@ export const CriticScoresDocument = gql`
     }
   }
 `;
-
-/**
- * __useCriticScoresQuery__
- *
- * To run a query within a React component, call `useCriticScoresQuery` and pass it any options that fit your needs.
- * When your component renders, `useCriticScoresQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCriticScoresQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function useCriticScoresQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    CriticScoresQuery,
-    CriticScoresQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CriticScoresQuery, CriticScoresQueryVariables>(
-    CriticScoresDocument,
-    options
-  );
-}
-export function useCriticScoresLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    CriticScoresQuery,
-    CriticScoresQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CriticScoresQuery, CriticScoresQueryVariables>(
-    CriticScoresDocument,
-    options
-  );
-}
-export type CriticScoresQueryHookResult = ReturnType<
-  typeof useCriticScoresQuery
->;
-export type CriticScoresLazyQueryHookResult = ReturnType<
-  typeof useCriticScoresLazyQuery
->;
-export type CriticScoresQueryResult = Apollo.QueryResult<
-  CriticScoresQuery,
-  CriticScoresQueryVariables
->;
-export function refetchCriticScoresQuery(
-  variables: CriticScoresQueryVariables
-) {
-  return { query: CriticScoresDocument, variables: variables };
-}
 export const CrossPlatformSalesDocument = gql`
   query CrossPlatformSales($options: PaginatedQueryOptions!) {
     salesByCrossPlatformTitles(options: $options) {
@@ -961,62 +854,6 @@ export const CrossPlatformSalesDocument = gql`
     }
   }
 `;
-
-/**
- * __useCrossPlatformSalesQuery__
- *
- * To run a query within a React component, call `useCrossPlatformSalesQuery` and pass it any options that fit your needs.
- * When your component renders, `useCrossPlatformSalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCrossPlatformSalesQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function useCrossPlatformSalesQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    CrossPlatformSalesQuery,
-    CrossPlatformSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-    CrossPlatformSalesQuery,
-    CrossPlatformSalesQueryVariables
-  >(CrossPlatformSalesDocument, options);
-}
-export function useCrossPlatformSalesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    CrossPlatformSalesQuery,
-    CrossPlatformSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    CrossPlatformSalesQuery,
-    CrossPlatformSalesQueryVariables
-  >(CrossPlatformSalesDocument, options);
-}
-export type CrossPlatformSalesQueryHookResult = ReturnType<
-  typeof useCrossPlatformSalesQuery
->;
-export type CrossPlatformSalesLazyQueryHookResult = ReturnType<
-  typeof useCrossPlatformSalesLazyQuery
->;
-export type CrossPlatformSalesQueryResult = Apollo.QueryResult<
-  CrossPlatformSalesQuery,
-  CrossPlatformSalesQueryVariables
->;
-export function refetchCrossPlatformSalesQuery(
-  variables: CrossPlatformSalesQueryVariables
-) {
-  return { query: CrossPlatformSalesDocument, variables: variables };
-}
 export const GameSalesDocument = gql`
   query GameSales($options: PaginatedQueryOptions!) {
     salesByTitles(options: $options) {
@@ -1048,55 +885,6 @@ export const GameSalesDocument = gql`
     }
   }
 `;
-
-/**
- * __useGameSalesQuery__
- *
- * To run a query within a React component, call `useGameSalesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGameSalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGameSalesQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function useGameSalesQuery(
-  baseOptions: Apollo.QueryHookOptions<GameSalesQuery, GameSalesQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GameSalesQuery, GameSalesQueryVariables>(
-    GameSalesDocument,
-    options
-  );
-}
-export function useGameSalesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GameSalesQuery,
-    GameSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GameSalesQuery, GameSalesQueryVariables>(
-    GameSalesDocument,
-    options
-  );
-}
-export type GameSalesQueryHookResult = ReturnType<typeof useGameSalesQuery>;
-export type GameSalesLazyQueryHookResult = ReturnType<
-  typeof useGameSalesLazyQuery
->;
-export type GameSalesQueryResult = Apollo.QueryResult<
-  GameSalesQuery,
-  GameSalesQueryVariables
->;
-export function refetchGameSalesQuery(variables: GameSalesQueryVariables) {
-  return { query: GameSalesDocument, variables: variables };
-}
 export const GamesListDocument = gql`
   query GamesList($options: PaginatedQueryOptions!) {
     games(options: $options) {
@@ -1128,55 +916,6 @@ export const GamesListDocument = gql`
     }
   }
 `;
-
-/**
- * __useGamesListQuery__
- *
- * To run a query within a React component, call `useGamesListQuery` and pass it any options that fit your needs.
- * When your component renders, `useGamesListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGamesListQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function useGamesListQuery(
-  baseOptions: Apollo.QueryHookOptions<GamesListQuery, GamesListQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GamesListQuery, GamesListQueryVariables>(
-    GamesListDocument,
-    options
-  );
-}
-export function useGamesListLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GamesListQuery,
-    GamesListQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GamesListQuery, GamesListQueryVariables>(
-    GamesListDocument,
-    options
-  );
-}
-export type GamesListQueryHookResult = ReturnType<typeof useGamesListQuery>;
-export type GamesListLazyQueryHookResult = ReturnType<
-  typeof useGamesListLazyQuery
->;
-export type GamesListQueryResult = Apollo.QueryResult<
-  GamesListQuery,
-  GamesListQueryVariables
->;
-export function refetchGamesListQuery(variables: GamesListQueryVariables) {
-  return { query: GamesListDocument, variables: variables };
-}
 export const GenreSalesDocument = gql`
   query GenreSales($options: PaginatedQueryOptions!) {
     salesByGenre(options: $options) {
@@ -1201,58 +940,6 @@ export const GenreSalesDocument = gql`
     }
   }
 `;
-
-/**
- * __useGenreSalesQuery__
- *
- * To run a query within a React component, call `useGenreSalesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGenreSalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGenreSalesQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function useGenreSalesQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    GenreSalesQuery,
-    GenreSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GenreSalesQuery, GenreSalesQueryVariables>(
-    GenreSalesDocument,
-    options
-  );
-}
-export function useGenreSalesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GenreSalesQuery,
-    GenreSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GenreSalesQuery, GenreSalesQueryVariables>(
-    GenreSalesDocument,
-    options
-  );
-}
-export type GenreSalesQueryHookResult = ReturnType<typeof useGenreSalesQuery>;
-export type GenreSalesLazyQueryHookResult = ReturnType<
-  typeof useGenreSalesLazyQuery
->;
-export type GenreSalesQueryResult = Apollo.QueryResult<
-  GenreSalesQuery,
-  GenreSalesQueryVariables
->;
-export function refetchGenreSalesQuery(variables: GenreSalesQueryVariables) {
-  return { query: GenreSalesDocument, variables: variables };
-}
 export const PublisherSalesDocument = gql`
   query PublisherSales($options: PaginatedQueryOptions!) {
     salesByPublisher(options: $options) {
@@ -1277,62 +964,6 @@ export const PublisherSalesDocument = gql`
     }
   }
 `;
-
-/**
- * __usePublisherSalesQuery__
- *
- * To run a query within a React component, call `usePublisherSalesQuery` and pass it any options that fit your needs.
- * When your component renders, `usePublisherSalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePublisherSalesQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function usePublisherSalesQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    PublisherSalesQuery,
-    PublisherSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PublisherSalesQuery, PublisherSalesQueryVariables>(
-    PublisherSalesDocument,
-    options
-  );
-}
-export function usePublisherSalesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    PublisherSalesQuery,
-    PublisherSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PublisherSalesQuery, PublisherSalesQueryVariables>(
-    PublisherSalesDocument,
-    options
-  );
-}
-export type PublisherSalesQueryHookResult = ReturnType<
-  typeof usePublisherSalesQuery
->;
-export type PublisherSalesLazyQueryHookResult = ReturnType<
-  typeof usePublisherSalesLazyQuery
->;
-export type PublisherSalesQueryResult = Apollo.QueryResult<
-  PublisherSalesQuery,
-  PublisherSalesQueryVariables
->;
-export function refetchPublisherSalesQuery(
-  variables: PublisherSalesQueryVariables
-) {
-  return { query: PublisherSalesDocument, variables: variables };
-}
 export const RatingSalesDocument = gql`
   query RatingSales($options: PaginatedQueryOptions!) {
     salesByRating(options: $options) {
@@ -1357,58 +988,6 @@ export const RatingSalesDocument = gql`
     }
   }
 `;
-
-/**
- * __useRatingSalesQuery__
- *
- * To run a query within a React component, call `useRatingSalesQuery` and pass it any options that fit your needs.
- * When your component renders, `useRatingSalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useRatingSalesQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function useRatingSalesQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    RatingSalesQuery,
-    RatingSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<RatingSalesQuery, RatingSalesQueryVariables>(
-    RatingSalesDocument,
-    options
-  );
-}
-export function useRatingSalesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    RatingSalesQuery,
-    RatingSalesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<RatingSalesQuery, RatingSalesQueryVariables>(
-    RatingSalesDocument,
-    options
-  );
-}
-export type RatingSalesQueryHookResult = ReturnType<typeof useRatingSalesQuery>;
-export type RatingSalesLazyQueryHookResult = ReturnType<
-  typeof useRatingSalesLazyQuery
->;
-export type RatingSalesQueryResult = Apollo.QueryResult<
-  RatingSalesQuery,
-  RatingSalesQueryVariables
->;
-export function refetchRatingSalesQuery(variables: RatingSalesQueryVariables) {
-  return { query: RatingSalesDocument, variables: variables };
-}
 export const UserScoresDocument = gql`
   query UserScores($options: PaginatedQueryOptions!) {
     highestUserScores(options: $options) {
@@ -1440,58 +1019,6 @@ export const UserScoresDocument = gql`
     }
   }
 `;
-
-/**
- * __useUserScoresQuery__
- *
- * To run a query within a React component, call `useUserScoresQuery` and pass it any options that fit your needs.
- * When your component renders, `useUserScoresQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useUserScoresQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function useUserScoresQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    UserScoresQuery,
-    UserScoresQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<UserScoresQuery, UserScoresQueryVariables>(
-    UserScoresDocument,
-    options
-  );
-}
-export function useUserScoresLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    UserScoresQuery,
-    UserScoresQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<UserScoresQuery, UserScoresQueryVariables>(
-    UserScoresDocument,
-    options
-  );
-}
-export type UserScoresQueryHookResult = ReturnType<typeof useUserScoresQuery>;
-export type UserScoresLazyQueryHookResult = ReturnType<
-  typeof useUserScoresLazyQuery
->;
-export type UserScoresQueryResult = Apollo.QueryResult<
-  UserScoresQuery,
-  UserScoresQueryVariables
->;
-export function refetchUserScoresQuery(variables: UserScoresQueryVariables) {
-  return { query: UserScoresDocument, variables: variables };
-}
 export const YearSalesDocument = gql`
   query YearSales($options: PaginatedQueryOptions!) {
     salesByYear(options: $options) {
@@ -1517,51 +1044,270 @@ export const YearSalesDocument = gql`
   }
 `;
 
-/**
- * __useYearSalesQuery__
- *
- * To run a query within a React component, call `useYearSalesQuery` and pass it any options that fit your needs.
- * When your component renders, `useYearSalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useYearSalesQuery({
- *   variables: {
- *      options: // value for 'options'
- *   },
- * });
- */
-export function useYearSalesQuery(
-  baseOptions: Apollo.QueryHookOptions<YearSalesQuery, YearSalesQueryVariables>
+export type SdkFunctionWrapper = <T>(
+  action: (requestHeaders?: Record<string, string>) => Promise<T>,
+  operationName: string
+) => Promise<T>;
+
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+
+export function getSdk(
+  client: GraphQLClient,
+  withWrapper: SdkFunctionWrapper = defaultWrapper
 ) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<YearSalesQuery, YearSalesQueryVariables>(
-    YearSalesDocument,
-    options
-  );
+  return {
+    ConsoleSales(
+      variables: ConsoleSalesQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<ConsoleSalesQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<ConsoleSalesQuery>(ConsoleSalesDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        "ConsoleSales"
+      );
+    },
+    CriticScores(
+      variables: CriticScoresQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<CriticScoresQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<CriticScoresQuery>(CriticScoresDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        "CriticScores"
+      );
+    },
+    CrossPlatformSales(
+      variables: CrossPlatformSalesQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<CrossPlatformSalesQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<CrossPlatformSalesQuery>(
+            CrossPlatformSalesDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        "CrossPlatformSales"
+      );
+    },
+    GameSales(
+      variables: GameSalesQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<GameSalesQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GameSalesQuery>(GameSalesDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        "GameSales"
+      );
+    },
+    GamesList(
+      variables: GamesListQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<GamesListQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GamesListQuery>(GamesListDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        "GamesList"
+      );
+    },
+    GenreSales(
+      variables: GenreSalesQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<GenreSalesQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GenreSalesQuery>(GenreSalesDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        "GenreSales"
+      );
+    },
+    PublisherSales(
+      variables: PublisherSalesQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<PublisherSalesQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<PublisherSalesQuery>(
+            PublisherSalesDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        "PublisherSales"
+      );
+    },
+    RatingSales(
+      variables: RatingSalesQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<RatingSalesQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<RatingSalesQuery>(RatingSalesDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        "RatingSales"
+      );
+    },
+    UserScores(
+      variables: UserScoresQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<UserScoresQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<UserScoresQuery>(UserScoresDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        "UserScores"
+      );
+    },
+    YearSales(
+      variables: YearSalesQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<YearSalesQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<YearSalesQuery>(YearSalesDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        "YearSales"
+      );
+    },
+  };
 }
-export function useYearSalesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    YearSalesQuery,
-    YearSalesQueryVariables
-  >
+export type Sdk = ReturnType<typeof getSdk>;
+export function getSdkWithHooks(
+  client: GraphQLClient,
+  withWrapper: SdkFunctionWrapper = defaultWrapper
 ) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<YearSalesQuery, YearSalesQueryVariables>(
-    YearSalesDocument,
-    options
-  );
+  const sdk = getSdk(client, withWrapper);
+  return {
+    ...sdk,
+    useConsoleSales(
+      key: SWRKeyInterface,
+      variables: ConsoleSalesQueryVariables,
+      config?: SWRConfigInterface<ConsoleSalesQuery, ClientError>
+    ) {
+      return useSWR<ConsoleSalesQuery, ClientError>(
+        key,
+        () => sdk.ConsoleSales(variables),
+        config
+      );
+    },
+    useCriticScores(
+      key: SWRKeyInterface,
+      variables: CriticScoresQueryVariables,
+      config?: SWRConfigInterface<CriticScoresQuery, ClientError>
+    ) {
+      return useSWR<CriticScoresQuery, ClientError>(
+        key,
+        () => sdk.CriticScores(variables),
+        config
+      );
+    },
+    useCrossPlatformSales(
+      key: SWRKeyInterface,
+      variables: CrossPlatformSalesQueryVariables,
+      config?: SWRConfigInterface<CrossPlatformSalesQuery, ClientError>
+    ) {
+      return useSWR<CrossPlatformSalesQuery, ClientError>(
+        key,
+        () => sdk.CrossPlatformSales(variables),
+        config
+      );
+    },
+    useGameSales(
+      key: SWRKeyInterface,
+      variables: GameSalesQueryVariables,
+      config?: SWRConfigInterface<GameSalesQuery, ClientError>
+    ) {
+      return useSWR<GameSalesQuery, ClientError>(
+        key,
+        () => sdk.GameSales(variables),
+        config
+      );
+    },
+    useGamesList(
+      key: SWRKeyInterface,
+      variables: GamesListQueryVariables,
+      config?: SWRConfigInterface<GamesListQuery, ClientError>
+    ) {
+      return useSWR<GamesListQuery, ClientError>(
+        key,
+        () => sdk.GamesList(variables),
+        config
+      );
+    },
+    useGenreSales(
+      key: SWRKeyInterface,
+      variables: GenreSalesQueryVariables,
+      config?: SWRConfigInterface<GenreSalesQuery, ClientError>
+    ) {
+      return useSWR<GenreSalesQuery, ClientError>(
+        key,
+        () => sdk.GenreSales(variables),
+        config
+      );
+    },
+    usePublisherSales(
+      key: SWRKeyInterface,
+      variables: PublisherSalesQueryVariables,
+      config?: SWRConfigInterface<PublisherSalesQuery, ClientError>
+    ) {
+      return useSWR<PublisherSalesQuery, ClientError>(
+        key,
+        () => sdk.PublisherSales(variables),
+        config
+      );
+    },
+    useRatingSales(
+      key: SWRKeyInterface,
+      variables: RatingSalesQueryVariables,
+      config?: SWRConfigInterface<RatingSalesQuery, ClientError>
+    ) {
+      return useSWR<RatingSalesQuery, ClientError>(
+        key,
+        () => sdk.RatingSales(variables),
+        config
+      );
+    },
+    useUserScores(
+      key: SWRKeyInterface,
+      variables: UserScoresQueryVariables,
+      config?: SWRConfigInterface<UserScoresQuery, ClientError>
+    ) {
+      return useSWR<UserScoresQuery, ClientError>(
+        key,
+        () => sdk.UserScores(variables),
+        config
+      );
+    },
+    useYearSales(
+      key: SWRKeyInterface,
+      variables: YearSalesQueryVariables,
+      config?: SWRConfigInterface<YearSalesQuery, ClientError>
+    ) {
+      return useSWR<YearSalesQuery, ClientError>(
+        key,
+        () => sdk.YearSales(variables),
+        config
+      );
+    },
+  };
 }
-export type YearSalesQueryHookResult = ReturnType<typeof useYearSalesQuery>;
-export type YearSalesLazyQueryHookResult = ReturnType<
-  typeof useYearSalesLazyQuery
->;
-export type YearSalesQueryResult = Apollo.QueryResult<
-  YearSalesQuery,
-  YearSalesQueryVariables
->;
-export function refetchYearSalesQuery(variables: YearSalesQueryVariables) {
-  return { query: YearSalesDocument, variables: variables };
-}
+export type SdkWithHooks = ReturnType<typeof getSdkWithHooks>;
