@@ -23,12 +23,12 @@ import { useState } from "react";
 import { GenreForm } from "./GenreForm";
 import {
   Console,
-  Genre,
   PaginatedQueryOptions,
   Rating,
   TextSearchType,
   useGenreSalesQuery,
 } from "src/generated/graphql";
+import { useAppSelector } from "../../redux/hooks";
 
 // a top level form component that houses
 // subforms to adjust the search fields
@@ -90,21 +90,7 @@ export const QueryForm = () => {
     Console._2600,
   ]);
 
-  // set up state for genres
-  const [genres, updateGenres] = useState<Genre[]>([
-    Genre.Action,
-    Genre.Adventure,
-    Genre.Fighting,
-    Genre.Misc,
-    Genre.Platform,
-    Genre.Puzzle,
-    Genre.Racing,
-    Genre.Roleplaying,
-    Genre.Shooter,
-    Genre.Simulation,
-    Genre.Sports,
-    Genre.Strategy,
-  ]);
+  const genres = useAppSelector((state) => state.searchParams.genres);
 
   // set up state for critic and user scores
   const [criticScoresRange, updateCriticScoresRange] = useState<number[]>([
@@ -141,6 +127,7 @@ export const QueryForm = () => {
       // add groupby and order by later
       where: {
         console: consoles,
+        genre: genres,
       },
     });
   };
@@ -203,10 +190,7 @@ export const QueryForm = () => {
                   </TabPanel>
 
                   <TabPanel key="genre-panel">
-                    <GenreForm
-                      selectedGenres={genres}
-                      updateGenres={updateGenres}
-                    />
+                    <GenreForm />
                   </TabPanel>
 
                   <TabPanel key="score-panel">

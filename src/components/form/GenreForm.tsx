@@ -14,8 +14,8 @@ import {
   GiMineExplosion,
   GiSportMedal,
 } from "react-icons/gi";
-import { Dispatch, SetStateAction } from "react";
-import { toggleFromArray } from "../../utils/toggleFromArray";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { updateGenres } from "../../redux/searchParamsReducer";
 
 const genresWithIcons: { genre: Genre; icon: any }[] = [
   {
@@ -68,25 +68,18 @@ const genresWithIcons: { genre: Genre; icon: any }[] = [
   },
 ];
 
-export const GenreForm = (props: {
-  selectedGenres: Genre[];
-  updateGenres: Dispatch<SetStateAction<Genre[]>>;
-}) => {
-  const updateGenres = (genre: Genre) => {
-    const updatedGenres = toggleFromArray(genre, props.selectedGenres);
-    props.updateGenres(updatedGenres);
-  };
+export const GenreForm = () => {
+  const genres = useAppSelector((state) => state.searchParams.genres);
+  const dispatch = useAppDispatch();
   return (
     <Grid templateColumns="repeat(3, 1fr)">
       {genresWithIcons.map((item) => (
         <Button
           leftIcon={<Icon as={item.icon} />}
           variant="outline"
-          colorScheme={
-            props.selectedGenres.includes(item.genre) ? "blue" : "gray"
-          }
+          colorScheme={genres.includes(item.genre) ? "blue" : "gray"}
           key={`${item.genre}-button`}
-          onClick={() => updateGenres(item.genre)}
+          onClick={() => dispatch(updateGenres(item.genre))}
         >
           {item.genre}
         </Button>
