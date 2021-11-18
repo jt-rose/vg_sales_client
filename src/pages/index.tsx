@@ -1,9 +1,10 @@
 import { BarChart, BarChartProps } from "../components/BarChart";
 import { QueryForm } from "../components/form/QueryForm";
 import { sdk } from "../client";
+import { GenreSalesQuery } from "src/generated/graphql";
 
-const Index = () => {
-  const { data, error } = sdk.useGenreSales("key-12345", {
+export const getStaticProps = async () => {
+  const res = await sdk.GenreSales({
     options: {
       where: {},
       limit: 10,
@@ -11,14 +12,24 @@ const Index = () => {
     },
   });
 
+  return {
+    props: {
+      res,
+    },
+  };
+};
+
+const Index = (props: { res: GenreSalesQuery }) => {
+  const data = props.res;
+
   console.log(data);
   return (
     <div>
       <h1>Sales</h1>
 
-      {error && (
+      {/*error && (
         <p>Oh no! {error instanceof Error ? error.message : "unknown"}</p>
-      )}
+      )*/}
       {!data && <p>...loading</p>}
       {data && (
         /*<VictoryChart
