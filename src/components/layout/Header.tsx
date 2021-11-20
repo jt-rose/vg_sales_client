@@ -3,8 +3,7 @@ import {
   Spacer,
   Box,
   Heading,
-  Icon,
-  Button,
+  IconButton,
   useColorMode,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
@@ -17,10 +16,13 @@ export const Header = () => {
       <Heading>VG Sales</Heading>
       <Spacer />
       <Box>
-        <Button onClick={toggleColorMode}>
-          {colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
-        </Button>
-        <Icon as={BiUserCircle} />
+        <IconButton
+          aria-label="toggle dark mode"
+          onClick={toggleColorMode}
+          icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
+          marginRight="3"
+        />
+        <IconButton aria-label="user settings" as={BiUserCircle} />
       </Box>
     </Flex>
   );
