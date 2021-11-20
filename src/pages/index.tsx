@@ -2,6 +2,7 @@ import { BarChart, BarChartProps } from "../components/BarChart";
 import { QueryForm } from "../components/form/QueryForm";
 import { sdk } from "../client";
 import { GenreSalesQuery } from "src/generated/graphql";
+import { Box, Flex, Text, OrderedList, ListItem } from "@chakra-ui/react";
 
 export const getStaticProps = async () => {
   const res = await sdk.GenreSales({
@@ -24,13 +25,13 @@ const Index = (props: { res: GenreSalesQuery }) => {
 
   console.log(data);
   return (
-    <div>
+    <Box>
       <h1>Sales</h1>
 
       {/*error && (
         <p>Oh no! {error instanceof Error ? error.message : "unknown"}</p>
       )*/}
-      {!data && <p>...loading</p>}
+      {!data && <Text>...loading</Text>}
       {data && (
         /*<VictoryChart
           singleQuadrantDomainPadding
@@ -52,30 +53,34 @@ const Index = (props: { res: GenreSalesQuery }) => {
             }))}
           />
         </VictoryChart>*/
-        <div>
-          <QueryForm />
-          <br />
-          <ul>
-            {data.salesByGenre.rows.map((r) => (
-              <li className="text-green-300" key={r.global_sales}>
-                {r.genre}: {r.global_sales}
-              </li>
-            ))}
-          </ul>
-          <p>Grouped By: {`${[...new Set(data.salesByGenre.groupedBy)]}`}</p>
-          <p>
-            Ordered By: {`${data.salesByGenre.orderedBy.map((x) => x.column)}`}
-          </p>
-          <p>has more?: {`${data.salesByGenre.hasMore}`}</p>
+        <Flex>
+          <Box>
+            <QueryForm />
+            <OrderedList>
+              {data.salesByGenre.rows.map((r) => (
+                <ListItem className="text-green-300" key={r.global_sales}>
+                  {r.genre}: {r.global_sales}
+                </ListItem>
+              ))}
+            </OrderedList>
+            <Text>
+              Grouped By: {`${[...new Set(data.salesByGenre.groupedBy)]}`}
+            </Text>
+            <Text>
+              Ordered By:{" "}
+              {`${data.salesByGenre.orderedBy.map((x) => x.column)}`}
+            </Text>
+            <Text>has more?: {`${data.salesByGenre.hasMore}`}</Text>
+          </Box>
 
           <BarChart
             chartData={data.salesByGenre.rows.map(
               (res) => new BarChartProps(res.global_sales, res.genre)
             )}
           />
-        </div>
+        </Flex>
       )}
-    </div>
+    </Box>
   );
 };
 
